@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Noted</title>
+	<script src="save-locally.js"></script>
+	<script src="notes.js"></script>
+
+</head>
+	
+<body onload="init_storage(); refreshNotes()">
+	
+	<h1 id="errorMsg"></h1>
+	<h2>Locally save note</h2>
+	<p>Click "save" to save your note via the Web Storage API.</p>
+	<form id="newNote">
+		<textarea id="note" rows="10" cols="30"></textarea>
+		<br><br>
+		<input type="button" value="Save" onClick="addNote()">
+	</form>
+
+	<br>
+	<input type="button" value="Reset Storage" onClick="reset_storage(); refreshNotes()">
+	<br>
+	<h2>Your notes:</h2>
+	<ul id="noteList">
+	</ul>
+
+
+</body>	
+
+</html>
