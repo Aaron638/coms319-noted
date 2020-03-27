@@ -16,7 +16,7 @@
 */
 
 function convert(str) {
-  if (str.includes("md")) {
+  //if (str.includes("md")) {
     str = str.replace("md", "");
     if (str.includes("##")) {
       str = "<h2>".concat(str, "</h2>");
@@ -32,7 +32,7 @@ function convert(str) {
       str = setCharAt(str, str.indexOf("*"), "<i>"); //replace first instance of *
       str = str.replace("*", "</i>"); //replace the next instance of *
     }
-  }
+  //}
   return str;
 }
 
