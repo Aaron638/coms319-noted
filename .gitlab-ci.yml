@@ -1,8 +1,14 @@
-# This file is a template, and might need editing before it works on your project.
-# Template project: https://gitlab.com/pages/jekyll
-# Docs: https://docs.gitlab.com/ce/pages/
-stages:
-  - build
-
-build:
-
+# This was copied from https://gitlab.com/gitlab-org/gitlab-foss/-/blob/master/lib/gitlab/ci/templates/Pages/HTML.gitlab-ci.yml
+# just an html template, we will need to add stuff for Node and then run mochaJS tests
+# Full project: https://gitlab.com/pages/plain-html
+pages:
+  stage: deploy
+  script:
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
