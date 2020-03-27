@@ -6,26 +6,40 @@
 	<script src="save-locally.js"></script>
 	<script src="notes.js"></script>
 
+	<style>
+		.writeNote {
+			width: 50%;
+			float: left;
+		}
+		.mergeNote {
+			width: 40%;
+			float: left;
+		}
+	</style>
+
 </head>
 	
 <body onload="init_storage(); refreshNotes()">
-	
-	<h1 id="errorMsg"></h1>
-	<h2>Locally save note</h2>
-	<p>Click "save" to save your note via the Web Storage API.</p>
-	<form id="newNote">
-		<textarea id="note" rows="10" cols="30"></textarea>
-		<br><br>
-		<input type="button" value="Save" onClick="addNote()">
-	</form>
+	<div class="writeNote">
+		<h1 id="errorMsg"></h1>
+		<h2>Locally save note</h2>
+		<p>Click "save" to save your note via the Web Storage API.</p>
+		<form id="newNote">
+			<textarea id="note" rows="10" cols="30"></textarea>
+			<br><br>
+			<input type="button" value="Save" onClick="addNote()">
+		</form>
 
-	<br>
-	<input type="button" value="Reset Storage" onClick="reset_storage(); refreshNotes()">
-	<br>
-	<h2>Your notes:</h2>
-	<ul id="noteList">
-	</ul>
+		<br>
+		<input type="button" value="Reset Storage" onClick="reset_storage(); refreshNotes()">
+		<br>
+		
+	</div>
 
+	<div class="mergeNote">
+		<h2>Your notes:</h2>
+		<ul id="noteList"></ul>
+	</div>
 
 </body>	
 

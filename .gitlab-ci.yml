@@ -3,6 +3,6 @@
 # Docs: https://docs.gitlab.com/ce/pages/
 stages:
   - build
-  - test
-  - deploy
+
+build:
 
