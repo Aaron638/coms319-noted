@@ -24,8 +24,10 @@ function refreshNotes() {
     for (var i = parseInt(getNumNotes()); i > 0; i--){
         var note = getNote(i);
         var node = document.createElement("LI");
-        var textnode = document.createTextNode(note);
-        node.appendChild(textnode);
+        note = convert(note); //parse into md
+        //var textnode = document.createTextNode(note);
+        //node.appendChild(textnode);
+        node.innerHTML = note;
         list.appendChild(node);
     }
 }
