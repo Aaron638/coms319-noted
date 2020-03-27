@@ -10,32 +10,37 @@
 
     As of now, supports
     *<i></i>*
+    **<b></b>**
     #<h1></h1>
     ##<h2></h2>
 */
 
-function convert(str){
-    if (str.includes("md")){
-        str = str.replace('md', '');
-        if(str.includes("##")){
-            str = '<h2>'.concat(str,'</h2>');
-        }
-        if(str.includes("#")){
-            str = '<h1>'.concat(str, '</h1>');
-        }
-        if(str.includes("*")){
-            str = setCharAt(str, str.indexOf('*'),'<i>');   //replace first instance of *
-            str = str.replace('*', '</i>');                 //replace the next instance of *
-        }
+function convert(str) {
+  if (str.includes("md")) {
+    str = str.replace("md", "");
+    if (str.includes("##")) {
+      str = "<h2>".concat(str, "</h2>");
     }
-    return str;
+    if (str.includes("#")) {
+      str = "<h1>".concat(str, "</h1>");
+    }
+    if (/(\*+){2}/g.test(str)) {//If there are 2 asterisks, bold it
+        str = str.replace(/(\*+){2}/g, "<b>");
+        str = str.replace(/(\*+){2}/g, "</b>");
+    }
+    if (str.includes("*")) {
+      str = setCharAt(str, str.indexOf("*"), "<i>"); //replace first instance of *
+      str = str.replace("*", "</i>"); //replace the next instance of *
+    }
+  }
+  return str;
 }
 
 /*
     setCharAt replaces the character at index with chr
     then returns the updated string
 */
-function setCharAt(str,index,chr) {
-    if(index > str.length-1) return str;
-    return str.substr(0,index) + chr + str.substr(index+1);
+function setCharAt(str, index, chr) {
+  if (index > str.length - 1) return str;
+  return str.substr(0, index) + chr + str.substr(index + 1);
 }
