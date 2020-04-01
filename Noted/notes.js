@@ -9,7 +9,7 @@ function addNote() {
     valCheck = true;
 
     var newNoteData = document.forms["newNote"]["note"].value;
-    pushNote(newNoteData);
+    pushNote(newNoteData, "text");
 
     refreshNotes();
 
@@ -22,7 +22,7 @@ function refreshNotes() {
     var list = document.getElementById('noteList');
     list.innerHTML = ""; //resets the list to empty
     for (var i = parseInt(getNumNotes()); i > 0; i--){
-        var note = getNote(i);
+        var note = getNoteText(i);
         var node = document.createElement("LI");
         note = convert(note); //parse into md
         //var textnode = document.createTextNode(note);
