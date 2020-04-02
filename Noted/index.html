@@ -8,6 +8,14 @@
 	<script src="mdParse.js"></script>
 
 	<style>
+		body {
+			background-color:#ff9c82;
+		}
+		html {
+			padding: 5px;
+			border: 5.5px solid black;
+		}
+		
 		.writeNote {
 			width: 50%;
 			float: left;
@@ -16,6 +24,18 @@
 			width: 40%;
 			float: left;
 		}
+		textarea#note{
+		border: 2px solid black;
+		padding: 1px;
+		background-color: #f7f5ed;
+		}
+		p#p{
+			font-size: 20px;
+		}
+		.button {
+			border: none;
+			background-color: Tomato;
+		}
 	</style>
 
 </head>
@@ -23,16 +43,16 @@
 <body onload="init_storage(); refreshNotes()">
 	<div class="writeNote">
 		<h1 id="errorMsg"></h1>
-		<h2>Locally save note</h2>
-		<p>Click "save" to save your note via the Web Storage API.</p>
-		<form id="newNote">
-			<textarea id="note" rows="10" cols="30"></textarea>
+		<h2 style="font-size:30px;">Locally save note</h2>
+		<p id="p">Click "save" to save your note via the Web Storage API.</p>
+		<form id="newNote"> 
+			<textarea name="note" id="note" rows="27" cols="60"></textarea>
 			<br><br>
 			<input type="button" value="Save" onClick="addNote()">
 		</form>
 
 		<br>
-		<input type="button" value="Reset Storage" onClick="reset_storage(); refreshNotes()">
+		<input type="button" id="ResetStorage" value="Reset Storage" onClick="reset_storage(); refreshNotes()">
 		<br>
 		
 	</div>
