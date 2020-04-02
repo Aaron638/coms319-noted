@@ -41,23 +41,32 @@ function getNumNotes(){
 	Input: data/text of the new note
 	Output: none
 */
-function pushNote(data){
+function pushNote(data, datatype){
 	var numNotes = parseInt(getNumNotes());
 	numNotes += 1;
 	localStorage.setItem("numNotes", parseInt(numNotes));
 	var noteName = 'note' + numNotes;
 	console.log("Setting note" + numNotes + " to: " + data);
-	localStorage.setItem(noteName, data);
+	var newNote = new Note(noteName, data, datatype);
+	localStorage.setItem(noteName, JSON.stringify(newNote));
 }
 
 /*
 	Returns the note data of the given ID/num
 	Input: ID/num of desired note
-	Output: Data (usually text) associated with the given note ID
+	Output: parsed JSON object of the note requested
 */
 function getNote(num){
 	var noteName = 'note' + num;
-	if (localStorage.getItem(noteName) != null){
-		return localStorage.getItem(noteName);
+	var returnedNote = localStorage.getItem(noteName);
+	if (returnedNote != null){
+		return JSON.parse(returnedNote);
 	}
+}
+
+function getNoteText(num){
+	var note = getNote(num);
+	console.log(note);
+	console.log(note.text);
+	return note.text;
 }
