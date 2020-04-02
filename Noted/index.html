@@ -10,11 +10,11 @@
 
 	<style>
 		body {
-			background-color:#ff9c82;
+			background-color:#ede49d;
 		}
 		html {
 			padding: 5px;
-			border: 5.5px solid black;
+			border: 5.5px solid #7E2332;
 		}
 		
 		.writeNote {
@@ -26,7 +26,7 @@
 			float: left;
 		}
 		textarea#note{
-		border: 2px solid black;
+		border: 2px solid #7E2332;
 		padding: 1px;
 		background-color: #f7f5ed;
 		}
@@ -44,8 +44,8 @@
 <body onload="init_storage(); refreshNotes()">
 	<div class="writeNote">
 		<h1 id="errorMsg"></h1>
-		<h2 style="font-size:30px;">Locally save note</h2>
-		<p id="p">Click "save" to save your note via the Web Storage API.</p>
+		<h2 style="font-size:30px; color:#7E2332;">Locally save note</h2>
+		<p id="p" style="color:#7E2332;">Click "save" to save your note via the Web Storage API.</p>
 		<form id="newNote"> 
 			<textarea name="note" id="note" rows="27" cols="60"></textarea>
 			<br><br>
@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="mergeNote">
-		<h2>Your notes:</h2>
+		<h2 style="color:#7E2332;">Your notes:</h2>
 		<ul id="noteList"></ul>
 	</div>
 
