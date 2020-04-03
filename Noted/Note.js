@@ -7,6 +7,8 @@ class Note {
 		this.noteName = noteName;
 		if(datatype == "text"){
 			this.text = data;
+		} else if (datatype == "map"){
+			this.text = data.text;
 		}
 	}
 }

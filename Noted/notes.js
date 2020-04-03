@@ -25,9 +25,27 @@ function refreshNotes() {
         var note = getNoteText(i);
         var node = document.createElement("LI");
         note = convert(note); //parse into md
-        //var textnode = document.createTextNode(note);
-        //node.appendChild(textnode);
         node.innerHTML = note;
         list.appendChild(node);
     }
+}
+
+/*
+	This function is called by refreshNotes to handle the collapsing of the map iframes
+*/
+function collapseHandler() {
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+
+	for (i = 0; i < coll.length; i++) {
+		coll[i].addEventListener("click", function () {
+			this.classList.toggle("active");
+			var content = this.nextElementSibling;
+			if (content.style.display === "block") {
+				content.style.display = "none";
+			} else {
+				content.style.display = "block";
+			}
+		});
+	}
 }
