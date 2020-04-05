@@ -3,18 +3,19 @@
 
 <head>
 	<title>Noted</title>
-
-	<!--I have decided to use Leafletjs and OpenStreetMap instead of Google Maps API which has a pricing per API call ~Aaron-->
+	<!--For Maps-->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-		crossorigin="" />
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin=""/>
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-		crossorigin=""></script>
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
+
 	<script src="Note.js"></script>
 	<script src="save-locally.js"></script>
 	<script src="notes.js"></script>
 	<script src="mdParse.js"></script>
+	<script src="mapUtil.js"></script>
 
 	<style>
 		body {
@@ -23,6 +24,20 @@
 		html {
 			padding: 5px;
 			border: 5.5px solid #7E2332;
+			border-radius: 20px;
+		}
+		
+		h2 {
+			text-transform:uppercase;
+			font-style: italic;
+			font-family: Helvetica;
+			font-size: 20px;
+			color: #7E2332;
+  			transition-duration: 0.4s;
+		}
+		h2:hover {
+			background-color: #7E2332;
+			color: #ede49d;
 		}
 		
 		.button {
@@ -31,6 +46,7 @@
   			color: white;
   			padding: 5px 10px;
   			text-align: center;
+			font-family: helvetica;
   			text-decoration: none;
 			border-radius: 10px;
   			display: inline-block;
@@ -45,7 +61,7 @@
 		}
 		.button1:hover {
 			background-color: #7E2332;
-			color: white;
+			color: #f7f5ed;
 		}
 		
 		.writeNote {
@@ -57,43 +73,78 @@
 			float: left;
 		}
 		textarea#note{
-		border: 3px solid #7E2332;
-		border-radius: 15px;
-		padding: 8px;
-		background-color: #f7f5ed;
+			border: 3px solid #7E2332;
+			border-radius: 8px;
+			padding: 8px;
+			background-color: #f7f5ed;
+			font-family: Helvetica;
+			letter-spacing:1.5px;
+			font-size: 16px;
 		}
 		p#p{
+			font-family: Helvetica;
+			color: #7E2332;
 			font-size: 20px;
 		}
-	
+		
+		.note {
+			font-family:Helvetica;
+			letter-spacing:1px;
+			color: #7E2332;
+  			transition-duration: 0.4s;
+		}
+		.note:hover {
+			background-color: #7E2332;
+			color: #f7f5ed;
+		}
+		
 	</style>
 
 </head>
 	
 <body onload="init_storage(); refreshNotes()">
 	<div class="writeNote">
-		<h1 id="errorMsg"></h1>
-		<h2 style="font-size:30px; color:#7E2332;">Locally save note</h2>
-		<p id="p" style="color:#7E2332;">Click "save" to save your note via the Web Storage API.</p>
+		<h2>Locally save note</h2>
+		<p id="p">Click "save" to save your note via the Web Storage API.</p>
 		<form id="newNote"> 
-			<textarea name="note" id="note" rows="26" cols="60"></textarea>
+			<textarea name="note" id="note" rows="26" cols="50"></textarea>
 			<br><br>
-			<label for="checkIsMap">Location:</label><input type="checkbox" id="checkIsMap" onclick="">
+			<label for="checkIsMap">Add Map:</label><input type="checkbox" id="checkIsMap" onClick="">
 			<br><br>
 			<button class="button button1" onClick="addNote()">Save</button>
 		</form>
 
 		<br>
 		<button class="button button1" onClick="reset_storage(); refreshNotes()">Reset Storage</button>
-		<br>
+		<br><br>	
 		
 	</div>
 
 	<div class="mergeNote">
-		<h2 style="color:#7E2332; font-size:30px;">Your notes:</h2>
-		<ul style="color:#7E2332;" id="noteList"></ul>
+		<h2>Your notes:</h2>
+		<ul class="note" id="noteList"></ul>
 	</div>
 
-</body>	
+<h1 id="errorMsg"></h1>
+
+
+</body>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 
 </html>

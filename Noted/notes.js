@@ -8,8 +8,15 @@
 function addNote() {
     valCheck = true;
 
-    var newNoteData = document.forms["newNote"]["note"].value;
-    pushNote(newNoteData, "text");
+    var newNoteText = document.forms["newNote"]["note"].value;
+
+    if (document.getElementById("checkIsMap").checked) {
+        pushNote(newNoteText, "map");
+    } else {
+        pushNote(newNoteText, "text");
+    }
+
+
 
     refreshNotes();
 
@@ -21,13 +28,26 @@ function addNote() {
 function refreshNotes() {
     var list = document.getElementById('noteList');
     list.innerHTML = ""; //resets the list to empty
-    for (var i = parseInt(getNumNotes()); i > 0; i--){
+    for (var i = parseInt(getNumNotes()); i > 0; i--) {
         var note = getNoteText(i);
         var node = document.createElement("LI");
-        note = convert(note); //parse into md
-        node.innerHTML = note;
+        var noteName = String("note" + i);
+        var returnedNote = localStorage.getItem(noteName);
+        var returnedNoteJSON = JSON.parse(returnedNote);
+        if (returnedNoteJSON.isMap == true) {
+            var html =  "<button type=\"button\" class=\"collapsible\">" + note + "</button>" +
+                        "<div class=\"content\">" +
+                        "<div id=\"" + note + "\" style=\"height: 480px;\"> </div> " +
+                        "</div>";
+            node.innerHTML = html;
+            tagMap(note);
+        } else {
+            note = convert(note); //parse into md
+            node.innerHTML = note;
+        }
         list.appendChild(node);
     }
+    collapseHandler();
 }
 
 /*
