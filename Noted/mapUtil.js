@@ -15,6 +15,8 @@ async function tagMap(placename) {
     //https://api.opencagedata.com/geocode/v1/json?q=PLACENAME&key=YOUR-API-KEY&limit=1
     var url = "https://api.opencagedata.com/geocode/v1/json?q=" + placename + "&key=0b75842b64ad4f21b1598f9c3ea41ac8&limit=1";
 
+    console.log(placename);
+
     fetch(url).then(function (response) {
         // Convert to JSON
         return response.json();

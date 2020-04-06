@@ -22,6 +22,12 @@ function addNote() {
 
 }
 
+function deleteNote(num){
+    console.log("Trying to delete: " + num);
+    var note = popNote(num);
+    console.log("Deleted note: " + note);
+}
+
 /*
     Pulls notes from the web storage and displays it on the page
 */
@@ -29,23 +35,15 @@ function refreshNotes() {
     var list = document.getElementById('noteList');
     list.innerHTML = ""; //resets the list to empty
     for (var i = parseInt(getNumNotes()); i > 0; i--) {
-        var note = getNoteText(i);
-        var node = document.createElement("LI");
-        var noteName = String("note" + i);
-        var returnedNote = localStorage.getItem(noteName);
-        var returnedNoteJSON = JSON.parse(returnedNote);
-        if (returnedNoteJSON.isMap == true) {
-            var html =  "<button type=\"button\" class=\"collapsible\">" + note + "</button>" +
-                        "<div class=\"content\">" +
-                        "<div id=\"" + note + "\" style=\"height: 480px;\"> </div> " +
-                        "</div>";
-            node.innerHTML = html;
-            tagMap(note);
-        } else {
-            note = convert(note); //parse into md
-            node.innerHTML = note;
+
+        var noteObj = getNote(i);
+        if (!((noteObj == undefined)||(noteObj == null))){
+            var noteText = getNoteText(i);
+            var node = document.createElement("LI");
+            node.innerHTML = noteObj.html;
+        
+            list.appendChild(node);
         }
-        list.appendChild(node);
     }
     collapseHandler();
 }

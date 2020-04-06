@@ -38,7 +38,7 @@ function getNumNotes(){
 
 /*
 	Creates a new note with the given data and updates the numNotes
-	Input: data/text of the new note
+	Input: data of the new note, datatype of the no
 	Output: none
 */
 function pushNote(data, datatype){
@@ -49,6 +49,19 @@ function pushNote(data, datatype){
 	console.log("Setting note" + numNotes + " to: " + data);
 	var newNote = new Note(noteName, data, datatype);
 	localStorage.setItem(noteName, JSON.stringify(newNote));
+}
+
+/*
+	Deletes the note with the given noteName from localStorage, returns the deleted note object
+	Input: noteName
+	Output: Note object deleted
+*/
+function popNote(noteName){
+	var deletedNote = localStorage.getItem(noteName);
+	localStorage.removeItem(noteName);
+
+	console.log(noteName + " removed from local storage.");
+	return deletedNote;
 }
 
 /*
@@ -66,7 +79,10 @@ function getNote(num){
 
 function getNoteText(num){
 	var note = getNote(num);
-	console.log(note);
-	console.log(note.text);
 	return note.text;
+}
+
+function isNoteMap(num){
+	var note = getNote(num);
+	return note.isMap;
 }
