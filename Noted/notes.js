@@ -23,9 +23,23 @@ function addNote() {
 }
 
 function deleteNote(num){
-    console.log("Trying to delete: " + num);
     var note = popNote(num);
-    console.log("Deleted note: " + note);
+}
+
+function generateHTML(noteObj){
+    var html = "";
+    if (noteObj.isMap){
+          html =  "<button type=\"button\" class=\"collapsible\">" + noteObj.text + "</button>" +
+                      "<div class=\"content\">" +
+                      "<div id=\"" + noteObj.text + "\" style=\"height: 480px;\"> </div> " +
+                      "</div>";
+          html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>"
+    } else {
+            html = convert(noteObj.text); //parse into md
+            html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>"
+    }
+    noteObj.html = html;
+    if (noteObj.isMap) tagMap(noteObj.text);
 }
 
 /*

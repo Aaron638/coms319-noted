@@ -48,7 +48,25 @@ function pushNote(data, datatype){
 	var noteName = 'note' + numNotes;
 	console.log("Setting note" + numNotes + " to: " + data);
 	var newNote = new Note(noteName, data, datatype);
+	generateHTML(newNote);
 	localStorage.setItem(noteName, JSON.stringify(newNote));
+	if (datatype == 'map'){
+		tagMap(data);
+	}
+}
+
+function editNote(noteName){
+	var noteObj = JSON.parse(localStorage.getItem(noteName));
+	valCheck = true;
+
+    var newNoteText = document.forms["editNote"]["editnote"].value;
+
+    noteObj.text = newNoteText;
+    generateHTML(noteObj);
+
+    localStorage.setItem(noteName, JSON.stringify(noteObj));
+
+    refreshNotes();
 }
 
 /*
