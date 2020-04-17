@@ -7,7 +7,6 @@
 */
 function addNote() {
     valCheck = true;
-
     var newNoteText = document.forms["newNote"]["note"].value;
 
     if (document.getElementById("checkIsMap").checked) {
@@ -16,30 +15,19 @@ function addNote() {
         pushNote(newNoteText, "text");
     }
 
-
-
     refreshNotes();
 
 }
 
-function deleteNote(num){
+function deleteNote(num) {
     var note = popNote(num);
 }
 
-function generateHTML(noteObj){
+function generateHTML(noteObj) {
     var html = "";
-    if (noteObj.isMap){
-          html =  "<button type=\"button\" class=\"collapsible\">" + noteObj.text + "</button>" +
-                      "<div class=\"content\">" +
-                      "<div id=\"" + noteObj.text + "\" style=\"height: 480px;\"> </div> " +
-                      "</div>";
-          html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>"
-    } else {
-            html = convert(noteObj.text); //parse into md
-            html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>"
-    }
+    html = convert(noteObj.text); //parse into md
+    html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
     noteObj.html = html;
-    if (noteObj.isMap) tagMap(noteObj.text);
 }
 
 /*
@@ -51,11 +39,26 @@ function refreshNotes() {
     for (var i = parseInt(getNumNotes()); i > 0; i--) {
 
         var noteObj = getNote(i);
-        if (!((noteObj == undefined)||(noteObj == null))){
+        if (!((noteObj == undefined) || (noteObj == null))) {
             var noteText = getNoteText(i);
             var node = document.createElement("LI");
-            node.innerHTML = noteObj.html;
-        
+
+            //The tagMap function needs to be in this refreshNotes function because it happens last
+            //While theres probably a better way, if we modify the HTML last second,
+            //theres little room for error
+            if (noteObj.isMap == true) {
+                var html = "<button type=\"button\" class=\"collapsible\">" + noteObj.text + "</button>" +
+                    "<div class=\"content\">" +
+                    "<div id=\"" + noteObj.text + "\" style=\"height: 480px;\"> </div> " +
+                    "</div>";
+                html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
+                node.innerHTML = html;
+                //Once the HTML is properly set, tagMap can work to override the div
+                tagMap(noteObj.text);
+            } else {
+                node.innerHTML = noteObj.html;
+            }
+
             list.appendChild(node);
         }
     }
@@ -66,18 +69,18 @@ function refreshNotes() {
 	This function is called by refreshNotes to handle the collapsing of the map iframes
 */
 function collapseHandler() {
-	var coll = document.getElementsByClassName("collapsible");
-	var i;
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-	for (i = 0; i < coll.length; i++) {
-		coll[i].addEventListener("click", function () {
-			this.classList.toggle("active");
-			var content = this.nextElementSibling;
-			if (content.style.display === "block") {
-				content.style.display = "none";
-			} else {
-				content.style.display = "block";
-			}
-		});
-	}
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
 }
