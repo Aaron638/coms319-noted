@@ -11,6 +11,8 @@ function addNote() {
 
     if (document.getElementById("checkIsMap").checked) {
         pushNote(newNoteText, "map");
+    } else if (document.getElementById("checkIsCard").checked){
+        pushNote(newNoteText, "card");
     } else {
         pushNote(newNoteText, "text");
     }
@@ -55,6 +57,12 @@ function refreshNotes() {
                 node.innerHTML = html;
                 //Once the HTML is properly set, tagMap can work to override the div
                 tagMap(noteObj.text);
+            } else if(noteObj.isCard == true) { //TODO, use generate HTML for cards instead
+                var html = 
+                "<div class = \"content\">" +
+                noteObj.text +
+                "</div>";
+                node.innerHTML = html;
             } else {
                 node.innerHTML = noteObj.html;
             }

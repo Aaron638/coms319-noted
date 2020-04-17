@@ -5,11 +5,11 @@
 	<title>Noted</title>
 	<!--For Maps-->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-	crossorigin=""/>
+		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+		crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-	crossorigin=""></script>
+		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+		crossorigin=""></script>
 
 	<script src="mapUtil.js"></script>
 	<script src="Note.js"></script>
@@ -19,136 +19,145 @@
 
 	<style>
 		body {
-			background-color:#ede49d;
+			background-color: #ede49d;
 		}
+
 		html {
 			padding: 5px;
 			border: 5.5px solid #7E2332;
 			border-radius: 20px;
 		}
-		
+
 		h2 {
-			text-transform:uppercase;
+			text-transform: uppercase;
 			font-style: italic;
 			font-family: Helvetica;
 			font-size: 20px;
 			color: #7E2332;
-  			transition-duration: 0.4s;
+			transition-duration: 0.4s;
 		}
+
 		h2:hover {
 			background-color: #7E2332;
 			color: #ede49d;
 		}
-		
+
 		.button {
-  			background-color: #7E2332;
-  			border: 2px solid #7E2332;
-  			color: white;
-  			padding: 5px 10px;
-  			text-align: center;
+			background-color: #7E2332;
+			border: 2px solid #7E2332;
+			color: white;
+			padding: 5px 10px;
+			text-align: center;
 			font-family: helvetica;
-  			text-decoration: none;
+			text-decoration: none;
 			border-radius: 10px;
-  			display: inline-block;
-  			font-size: 16px;
-  			margin: 4px 2px;
-  			transition-duration: 0.4s;
-  			cursor: pointer;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			transition-duration: 0.4s;
+			cursor: pointer;
 		}
+
 		.button1 {
-			background-color: white; 
-			color: #7E2332; 
+			background-color: white;
+			color: #7E2332;
 		}
+
 		.button1:hover {
 			background-color: #7E2332;
 			color: #f7f5ed;
 		}
-		
+
 		.writeNote {
 			width: 50%;
 			float: left;
 		}
+
 		.mergeNote {
 			width: 40%;
 			float: left;
 		}
-		textarea#note{
+
+		textarea#note {
 			border: 3px solid #7E2332;
 			border-radius: 8px;
 			padding: 8px;
 			background-color: #f7f5ed;
 			font-family: Helvetica;
-			letter-spacing:1.5px;
+			letter-spacing: 1.5px;
 			font-size: 16px;
 		}
-		p#p{
+
+		p#p {
 			font-family: Helvetica;
 			color: #7E2332;
 			font-size: 20px;
 		}
-		
+
 		.note {
-			font-family:Helvetica;
-			letter-spacing:1px;
+			font-family: Helvetica;
+			letter-spacing: 1px;
 			color: #7E2332;
-  			transition-duration: 0.4s;
+			transition-duration: 0.4s;
 		}
+
 		.note:hover {
 			background-color: #7E2332;
 			color: #f7f5ed;
 		}
 
 		#editOverlay {
-		  position: fixed;
-		  display: none;
-		  width: 100%;
-		  height: 100%;
-		  top: 0;
-		  left: 0;
-		  right: 0;
-		  bottom: 0;
-		  background-color: rgba(0,0,0,0.5);
-		  z-index: 2;
-		  cursor: pointer;
+			position: fixed;
+			display: none;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 2;
+			cursor: pointer;
 		}
 
 		#editNoteDiv {
 			text-align: center;
 		}
-		
 	</style>
 
 </head>
-	
+
 <body onload="init_storage(); refreshNotes()">
 
 	<div id="editOverlay">
-	  <div id="editNoteDiv"><h2>Editing note</h2>
-	  	<form id="editNote">
-	  		<textarea name="editnote" id="editnote" rows="26" cols="50"></textarea>
-	  		<br><br>
-	  		<button class="button" id="editbutton" onClick="">Save</button>
-	  		<button class="button button2" onClick="exitOverlay()">Cancel</button>
-	  	</form>	
+		<div id="editNoteDiv">
+			<h2>Editing note</h2>
+			<form id="editNote">
+				<textarea name="editnote" id="editnote" rows="26" cols="50"></textarea>
+				<br><br>
+				<button class="button" id="editbutton" onClick="">Save</button>
+				<button class="button button2" onClick="exitOverlay()">Cancel</button>
+			</form>
 
-	  </div>
+		</div>
 	</div>
 
 	<div class="writeNote">
 		<h2>Locally save note</h2>
 		<p id="p">Click "save" to save your note via the Web Storage API.</p>
-		<form id="newNote"> 
+		<form id="newNote">
 			<textarea name="note" id="note" rows="26" cols="50"></textarea>
 			<br><br>
 			<label for="checkIsMap">Add Map:</label><input type="checkbox" id="checkIsMap" onClick="">
+			<label for="checkIsMap">Add Card:</label><input type="checkbox" id="checkIsCard" onClick="">
 			<br><br>
 			<button class="button button1" onClick="addNote()">Save</button>
 		</form>
 
 		<br>
 		<button class="button button1" onClick="reset_storage(); refreshNotes()">Reset Storage</button>
-		<br><br>	
-		
+		<br><br>
+
 	</div>
 
 	<div class="mergeNote">
@@ -156,35 +165,35 @@
 		<ul class="note" id="noteList"></ul>
 	</div>
 
-<h1 id="errorMsg"></h1>
+	<h1 id="errorMsg"></h1>
 
 
 </body>
 
 <script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
+	for (i = 0; i < coll.length; i++) {
+		coll[i].addEventListener("click", function () {
+			this.classList.toggle("active");
+			var content = this.nextElementSibling;
+			if (content.style.display === "block") {
+				content.style.display = "none";
+			} else {
+				content.style.display = "block";
+			}
+		});
+	}
 
-function exitOverlay() {
-	document.getElementById("editOverlay").style.display = "none";
-}
+	function exitOverlay() {
+		document.getElementById("editOverlay").style.display = "none";
+	}
 
-function enterEditOverlay(noteName) {
-	document.getElementById("editbutton").setAttribute("onClick", "editNote(\'" + noteName + "\');");
-	document.getElementById("editOverlay").style.display = "block";
-}
+	function enterEditOverlay(noteName) {
+		document.getElementById("editbutton").setAttribute("onClick", "editNote(\'" + noteName + "\');");
+		document.getElementById("editOverlay").style.display = "block";
+	}
 </script>
 
 </html>

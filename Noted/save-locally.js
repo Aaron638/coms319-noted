@@ -50,9 +50,9 @@ function pushNote(data, datatype){
 	var newNote = new Note(noteName, data, datatype);
 	generateHTML(newNote);
 	localStorage.setItem(noteName, JSON.stringify(newNote));
-	if (datatype == 'map'){
-		tagMap(data);
-	}
+	// if (datatype == 'map'){
+	// 	tagMap(data);
+	// }
 }
 
 function editNote(noteName){
