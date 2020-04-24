@@ -3,11 +3,6 @@
     We can pass data to fill in the spans, and properly set up the event link
     https://stackoverflow.com/a/4784796
 
-    When the page runs we need to run
-
-    setTitle("string");
-    defineDate(date, date);
-    calendarLink("string", date, date);
 */
 
 function setTitle(title) {
@@ -77,3 +72,19 @@ function calendarLink(title, startDate, endDate) {
     urlStr = urlStr.replace(/ /g, "%20");
     document.getElementById("calendarlink").href = urlStr;
 }
+
+
+//Run the code on windowload
+window.onload;
+//get from url parameter
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var key = urlParams.get("cardkey");
+console.log(key);
+//load the event object from storage
+var eventObject = JSON.parse(localStorage.getItem(key));
+console.log(eventObject);
+console.log(eventObject.start);
+setTitle(eventObject.title);
+defineDate(new Date(eventObject.start), new Date(eventObject.end));
+calendarLink(eventObject.title, new Date(eventObject.start), new Date(eventObject.end));
