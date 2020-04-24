@@ -84,6 +84,10 @@
 			float: left;
 		}
 
+		.calendarButton {
+			position: relative;
+		}
+
 		textarea#note {
 			border: 3px solid #7E2332;
 			border-radius: 8px;
@@ -148,6 +152,12 @@
 		</div>
 	</div>
 
+	<!-- Calendar Event Button -->
+	<!-- im bad at CSS so its top right oops-->
+	<button id="calendar" class="button button1 calendarButton" onclick="calendarForm()">
+		Calendar Event
+	</button>
+
 	<div class="writeNote">
 		<h2>Locally save note</h2>
 		<p id="p">Click "save" to save your note via the Web Storage API.</p>
@@ -165,11 +175,6 @@
 				<input type="checkbox" id="checkIsCard" class="mdl-checkbox__input">
 				<span class="mdl-checkbox__label">Add Card:</span>
 			</label>
-			<!--Calendar Event Checkbox-->
-			<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsEvent">
-				<input type="checkbox" id="checkIsEvent" class="mdl-checkbox__input">
-				<span class="mdl-checkbox__label">Add Event:</span>
-			</label>
 			<br><br>
 			<button class="button button1" onClick="addNote()">Save</button>
 		</form>
@@ -179,10 +184,12 @@
 		<br><br>
 
 	</div>
-	
+
 	<div class="mergeNote">
 		<h2>Your notes:</h2>
 		<ul class="note" id="noteList"></ul>
+		<!-- for proof of concept only-->
+		<li><div id="cardHere"></div></li>
 	</div>
 
 	<h1 id="errorMsg"></h1>

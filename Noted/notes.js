@@ -11,7 +11,7 @@ function addNote() {
 
     if (document.getElementById("checkIsMap").checked) {
         pushNote(newNoteText, "map");
-    } else if (document.getElementById("checkIsCard").checked){
+    } else if (document.getElementById("checkIsCard").checked) {
         pushNote(newNoteText, "card");
     } else {
         pushNote(newNoteText, "text");
@@ -57,11 +57,12 @@ function refreshNotes() {
                 node.innerHTML = html;
                 //Once the HTML is properly set, tagMap can work to override the div
                 tagMap(noteObj.text);
-            } else if(noteObj.isCard == true) { //TODO, use generate HTML for cards instead
-                var html = 
-                "<div class = \"content\">" +
-                noteObj.text +
-                "</div>";
+            } else if (noteObj.isCard == true) { //TODO, use generate HTML for cards instead
+                var html =
+                    "<div class = \"content\">" +
+                    noteObj.text +
+                    "</div>";
+                html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
                 node.innerHTML = html;
             } else {
                 node.innerHTML = noteObj.html;
@@ -91,4 +92,9 @@ function collapseHandler() {
             }
         });
     }
+}
+
+//Just for Proof of Concept for now
+function calendarForm() {
+    makeEventCard("Event Card", (new Date()), (new Date(2020, 3, 24, 11)));
 }

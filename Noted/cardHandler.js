@@ -7,12 +7,11 @@
     Using the object and emebed tags, we can easily place HTML within HTML without hassle:
     https://stackoverflow.com/a/8702778
 
-    The difficulty is handling the passing of data between the cards.
-
+    The difficulty is handling the passing of data between the cards. This is done using parameters in the path to the card
+    for example ./cards/EventCard/EventCard.html?cardkey=note1
 */
 
-
-
+//TODO this is for the demo, delete this
 function makeEventCard(eventTitle, startDate, endDate) {
 
     //We make an event object, and pass that into the card
@@ -24,10 +23,17 @@ function makeEventCard(eventTitle, startDate, endDate) {
     //create the card element
     //the path to the card includes a cardkey paramter in the URL
     document.getElementById("cardHere").innerHTML = '<object width="600" height="400">' +
-        '    <embed src=\"./EventCard/EventCard.html?cardkey=' + eventTitle + '\" width=\"600\" height=\"400\"> </embed>' +
+        '    <embed src=\"./cards/EventCard/EventCard.html?cardkey=' + eventTitle + '\" width=\"600\" height=\"400\"> </embed>' +
         '</object>';
-
+    //for cardTester use /EventCard/EventCard.html?cardkey=
+    //for index use 
 
 }
 
-window.onload = makeEventCard("Event Card", (new Date()), (new Date(2020, 3, 24, 11)));
+//Generic make card function
+function makeCard(titleKeystring, object, pathToCardHTMLstring, divIDstring) {
+    localStorage.setItem(titleKey, JSON.stringify(object));
+    document.getElementById(divIDstring).innerHTML = '<object width="600" height="400">' +
+        '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + titleKeystring + '\" width=\"600\" height=\"400\"> </embed>' +
+        '</object>';
+}

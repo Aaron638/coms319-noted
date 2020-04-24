@@ -12,8 +12,8 @@ var Note = function(noteName, data, datatype) {
 			this.isMap = true;
 			this.text = data;
 		} else if (datatype == "card"){
-			this.text = data;
 			this.isCard = true;
+			this.text = data;
 		}
 
 		this.html = "";

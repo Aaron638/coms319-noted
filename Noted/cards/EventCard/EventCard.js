@@ -76,7 +76,7 @@ function calendarLink(title, startDate, endDate) {
 
 //Run the code on windowload
 window.onload;
-//get from url parameter
+//get key from url parameter
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 var key = urlParams.get("cardkey");
@@ -85,6 +85,7 @@ console.log(key);
 var eventObject = JSON.parse(localStorage.getItem(key));
 console.log(eventObject);
 console.log(eventObject.start);
+//modify the HTML DOM
 setTitle(eventObject.title);
 defineDate(new Date(eventObject.start), new Date(eventObject.end));
 calendarLink(eventObject.title, new Date(eventObject.start), new Date(eventObject.end));
