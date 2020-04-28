@@ -3,20 +3,20 @@
 	numNotes, num - keeps track of number of notes saved  in local storage
 	noteN, text - N is the ID of the note
 */
-function init_storage(){
-	if (typeof(Storage) == "undefined") {
-			document.getElementById("result").innerHTML = "Your browser doesn't support Web Storage! Noted will not work.";
+function init_storage() {
+	if (typeof (Storage) == "undefined") {
+		document.getElementById("result").innerHTML = "Your browser doesn't support Web Storage! Noted will not work.";
+	}
+	else {
+		if (localStorage.getItem("numNotes") === NaN) {
+			console.log("numNotes is NULL, resetting local storage.")
+			localStorage.clear();
+			localStorage.setItem("numNotes", parseInt(0));
 		}
-		else {
-			if (localStorage.getItem("numNotes") === NaN){
-				console.log("numNotes is NULL, resetting local storage.")
-				localStorage.clear();
-				localStorage.setItem("numNotes", parseInt(0));
-			}
-		}
+	}
 }
 
-function reset_storage(){
+function reset_storage() {
 	localStorage.clear();
 	localStorage.setItem("numNotes", parseInt(0));
 }
@@ -27,8 +27,8 @@ function reset_storage(){
 	Input: none
 	Output: number of notes
 */
-function getNumNotes(){
-	if (localStorage.getItem("numNotes") != null){
+function getNumNotes() {
+	if (localStorage.getItem("numNotes") != null) {
 		return parseInt(localStorage.getItem("numNotes"));
 	}
 	else {
@@ -38,35 +38,114 @@ function getNumNotes(){
 
 /*
 	Creates a new note with the given data and updates the numNotes
-	Input: data of the new note, datatype of the no
-	Output: none
+	Input: data of the new note, whether the note is a map or not
+	Output: Note object
 */
-function pushNote(data, datatype){
+function pushNote(data, isMap) {
 	var numNotes = parseInt(getNumNotes());
 	numNotes += 1;
 	localStorage.setItem("numNotes", parseInt(numNotes));
 	var noteName = 'note' + numNotes;
-	console.log("Setting note" + numNotes + " to: " + data);
-	var newNote = new Note(noteName, data, datatype);
-	generateHTML(newNote);
+
+	//Take the note's data, which is currently text, and classify it.
+	var cardType = classifiyNote(data, isMap);
+
+	//Make the note object and store it
+	console.log("Setting note" + numNotes + " to: " + data + "as type: " + cardType);
+	var newNote = new Note(noteName, data, cardType);
 	localStorage.setItem(noteName, JSON.stringify(newNote));
-	// if (datatype == 'map'){
-	// 	tagMap(data);
-	// }
+
+	//generate the html card for that note
+	newNote.html = generateHTML(newNote);
+	return newNote;
 }
 
-function editNote(noteName){
+/*
+	This function classifies notes using keywords.
+	By default all notes are TEXT cards.
+	Notes that contain a calendar date formatted in dd/mm/yyyy, dd-mm-yyyy, or dd.mm.yyyy are EVENT cards.
+	Notes that contain a link starting in http:// and ending in .jpg, .png or .gif are IMAGE cards.
+	Notes that are submitted with a checkmark are MAP cards.
+
+	RegEx from here:
+	https://stackoverflow.com/a/15504877
+	https://regexr.com/3g1v7
+
+	Input:	text as a string
+			isMap as a boolean
+	Output:	note datatype which is either "text", "map", "image", or "event"
+*/
+function classifiyNote(inputText, isMap) {
+	if (inputText.search(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/gm) > 0) {
+		return "event";
+	} else if (inputText.search(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gm)) {
+		return "image"
+	} else if (isMap == true){
+		return "map";
+	} else {
+		return "text";
+	}
+}
+
+/*
+	generateHTML is now heavily modified to work with "Cards"
+	"Cards" are their own HTML files that are embedded into the page.
+	
+	The cards in local storage have:
+	Key - "noteN_dataType"
+	Data - the data to be used by the card 
+		so for example a Date() object for an event card
+
+	Input: note object
+	Output: html for embedding a card
+*/
+function generateHTML(noteObj) {
+	var html = "";
+	var keyString = noteObj.noteName + "_" + noteObj.dataType;
+	var cardData, pathToCardHTMLstring; 
+
+	if (noteObj.dataType == "map"){
+		
+	} else if (noteObj.dataType == "event"){
+		var date
+
+		cardData = { title: noteObj.text, 
+							start: startDate, 
+							end: endDate };
+		localStorage.setItem(keyString, JSON.stringify(object));
+		pathToCardHTMLstring = "./ImageCard/ImageCard.html";
+	} else if (noteObj.dataType == "image"){
+		cardData = noteObj.text;
+		localStorage.setItem(keyString, JSON.stringify(object));
+		pathToCardHTMLstring = "./ImageCard/ImageCard.html";
+	} else {	//TODO make sure the text card has a script that parses into markdown
+		cardData = noteObj.text;
+		localStorage.setItem(keyString, JSON.stringify(object));
+		pathToCardHTMLstring = "./TextCard/TextCard.html";
+	}
+
+	
+	html = 	'<object width="600" height="400">' +
+			'    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + keystring + '\" width=\"600\" height=\"400\"> </embed>' +
+			'</object>';
+
+	//concatenate delete and edit buttons onto the html
+	html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
+	return html;
+}
+
+function editNote(noteName) {
 	var noteObj = JSON.parse(localStorage.getItem(noteName));
 	valCheck = true;
 
-    var newNoteText = document.forms["editNote"]["editnote"].value;
+	var newNoteText = document.forms["editNote"]["editnote"].value;
 
-    noteObj.text = newNoteText;
-    generateHTML(noteObj);
+	noteObj.text = newNoteText;
+	generateHTML(noteObj);
 
-    localStorage.setItem(noteName, JSON.stringify(noteObj));
+	localStorage.setItem(noteName, JSON.stringify(noteObj));
 
-    refreshNotes();
+	refreshNotes();
 }
 
 /*
@@ -74,7 +153,7 @@ function editNote(noteName){
 	Input: noteName
 	Output: Note object deleted
 */
-function popNote(noteName){
+function popNote(noteName) {
 	var deletedNote = localStorage.getItem(noteName);
 	localStorage.removeItem(noteName);
 
@@ -87,20 +166,20 @@ function popNote(noteName){
 	Input: ID/num of desired note
 	Output: parsed JSON object of the note requested
 */
-function getNote(num){
+function getNote(num) {
 	var noteName = 'note' + num;
 	var returnedNote = localStorage.getItem(noteName);
-	if (returnedNote != null){
+	if (returnedNote != null) {
 		return JSON.parse(returnedNote);
 	}
 }
 
-function getNoteText(num){
+function getNoteText(num) {
 	var note = getNote(num);
 	return note.text;
 }
 
-function isNoteMap(num){
+function isNoteMap(num) {
 	var note = getNote(num);
 	return note.isMap;
 }

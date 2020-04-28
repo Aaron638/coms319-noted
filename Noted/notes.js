@@ -9,10 +9,10 @@ function addNote() {
     valCheck = true;
     var newNoteText = document.forms["newNote"]["note"].value;
 
+    var noteObject;
+
     if (document.getElementById("checkIsMap").checked) {
         pushNote(newNoteText, "map");
-    } else if (document.getElementById("checkIsCard").checked){
-        pushNote(newNoteText, "card");
     } else {
         pushNote(newNoteText, "text");
     }
@@ -25,13 +25,6 @@ function deleteNote(num) {
     var note = popNote(num);
 }
 
-function generateHTML(noteObj) {
-    var html = "";
-    html = convert(noteObj.text); //parse into md
-    html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
-    noteObj.html = html;
-}
-
 /*
     Pulls notes from the web storage and displays it on the page
 */
@@ -42,7 +35,7 @@ function refreshNotes() {
 
         var noteObj = getNote(i);
         if (!((noteObj == undefined) || (noteObj == null))) {
-            var noteText = getNoteText(i);
+            //var noteText = getNoteText(i);
             var node = document.createElement("LI");
 
             //The tagMap function needs to be in this refreshNotes function because it happens last
@@ -57,11 +50,11 @@ function refreshNotes() {
                 node.innerHTML = html;
                 //Once the HTML is properly set, tagMap can work to override the div
                 tagMap(noteObj.text);
-            } else if(noteObj.isCard == true) { //TODO, use generate HTML for cards instead
-                var html = 
-                "<div class = \"content\">" +
-                noteObj.text +
-                "</div>";
+            } else if (noteObj.isCard == true) { //TODO, use generate HTML for cards instead
+                var html =
+                    "<div class = \"content\">" +
+                    noteObj.text +
+                    "</div>";
                 node.innerHTML = html;
             } else {
                 node.innerHTML = noteObj.html;
