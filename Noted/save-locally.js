@@ -93,8 +93,6 @@ function classifiyNote(inputText, isMap) {
 	Output: html for embedding a card
 */
 function generateHTML(noteObj) {
-    // var html = "";
-    // var key = noteObj.noteName + "_" + noteObj.dataType;
     var pathToCardHTMLstring;
 
     if (noteObj.dataType == "map") {
@@ -116,12 +114,13 @@ function generateHTML(noteObj) {
         '</object>';
 
     //concatenate delete and edit buttons onto the html
-    //TODO add a refresh card function to each card's js file. This is to allow editing
     html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
     return html;
 }
 
-//TODO double check this works
+//TODO Note: This may be broken now
+//The content may need to be re-sent to the card
+//Maybe switch to adding a note, then deleting it
 function editNote(noteName) {
     var noteObj = JSON.parse(localStorage.getItem(noteName));
     valCheck = true;
@@ -165,9 +164,4 @@ function getNote(num) {
 function getNoteText(num) {
     var note = getNote(num);
     return note.text;
-}
-
-function isNoteMap(num) {
-    var note = getNote(num);
-    return note.isMap;
 }

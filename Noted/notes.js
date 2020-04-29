@@ -48,7 +48,7 @@ function refreshNotes() {
 
 /*
     This function is called by refreshNotes to handle the collapsing of the map iframes
-    Switch to CSS collapsing, more performant and cooler to look at, buttons are ugly
+    TODO Switch to CSS collapsing, more performant and cooler to look at, buttons are ugly
 */
 function collapseHandler() {
     var coll = document.getElementsByClassName("collapsible");
