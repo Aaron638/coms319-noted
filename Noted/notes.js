@@ -20,6 +20,13 @@ function addNote() {
     refreshNotes();
 
 }
+/*
+    Similar to addNote(), but opens a dialogue for picking a date and time
+    Then it directly forwards the date and time to the card.
+*/
+function addEvent(){
+    
+}
 
 function deleteNote(num) {
     var note = popNote(num);

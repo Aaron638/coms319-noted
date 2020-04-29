@@ -3,7 +3,7 @@
 
 <head>
 	<title>Noted</title>
-	<!--For Maps-->
+	<!--For Maps Leaflet.js-->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
 		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
 		crossorigin="" />
@@ -11,14 +11,17 @@
 		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
 		crossorigin=""></script>
 
-	<!--For Cards-->
+	<!--For Cards MaterialDesignLite-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-amber.min.css" />
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
-	<!--For Markdown Formatting-->
+	<!--For Markdown Formatting Marked.js-->
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+	<!--DateTimePicker from Propeller.in-->
+
+	<!--Our Scripts-->
 	<script src="mapUtil.js"></script>
 	<script src="Note.js"></script>
 	<script src="save-locally.js"></script>
@@ -163,18 +166,9 @@
 				<input type="checkbox" id="checkIsMap" class="mdl-checkbox__input">
 				<span class="mdl-checkbox__label">Add Map:</span>
 			</label>
-			<!--Card Checkbox-->
-			<!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsCard">
-				<input type="checkbox" id="checkIsCard" class="mdl-checkbox__input">
-				<span class="mdl-checkbox__label">Add Card:</span>
-			</label> -->
-			<!--Calendar Event Checkbox-->
-			<!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsEvent">
-				<input type="checkbox" id="checkIsEvent" class="mdl-checkbox__input">
-				<span class="mdl-checkbox__label">Add Event:</span>
-			</label>
-			<br><br> -->
 			<button class="button button1" onClick="addNote()">Save</button>
+			<!-- Event Button -->
+			<button class="button button1" onClick="">Add Event</button>
 		</form>
 
 		<br>
@@ -182,7 +176,7 @@
 		<br><br>
 
 	</div>
-	
+
 	<div class="mergeNote">
 		<h2>Your notes:</h2>
 		<ul class="note" id="noteList"></ul>
