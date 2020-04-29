@@ -36,8 +36,7 @@ function getNumNotes() {
 
 /*
 	Creates a new note with the given data and updates the numNotes
-	Input: data of the new note, whether the note is a map or not
-	Output: Note object
+	Input: data of the new note, boolean isMap
 */
 function pushNote(data, isMap) {
     var numNotes = parseInt(getNumNotes());
@@ -45,19 +44,15 @@ function pushNote(data, isMap) {
     localStorage.setItem("numNotes", parseInt(numNotes));
     var noteName = 'note' + numNotes;
 
-    //Take the note's data, which is currently text, and classify it.
-    var cardType = classifiyNote(data, isMap);
-
-    //Make the note object
-    console.log("Setting note" + numNotes + " to: " + data + "as type: " + cardType);
-    var newNote = new Note(noteName, data, cardType);
+    //Make the note object, and classify it as "text", "map", or "image" ("event" note creation in /datetimepicker/sendEvent.js)
+    var newNote = new Note(noteName, data, classifiyNote(data, isMap));
+    console.log("Setting note" + numNotes + " to: " + newNote.text + "as type: " + newNote.datatype);
 
     //generate the html card for that note
     newNote.html = generateHTML(newNote);
 
     //store the note object and return
     localStorage.setItem(noteName, JSON.stringify(newNote));
-    return newNote;
 }
 
 /*
@@ -77,10 +72,10 @@ function pushNote(data, isMap) {
 	Output:	note datatype which is either "text", "map", or "image"
 */
 function classifiyNote(inputText, isMap) {
-    if (inputText.search(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gm) > 0) {
-        return "image"
-    } else if (isMap == true) {
+    if (isMap == true) {
         return "map";
+    } else if (inputText.search(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gm) > 0) {
+        return "image";
     } else {
         return "text";
     }
@@ -88,55 +83,45 @@ function classifiyNote(inputText, isMap) {
 
 /*
 	generateHTML is now heavily modified to work with "Cards"
-	"Cards" are their own HTML files that are embedded into the page.
+	"Cards" are their own HTML pages that are embedded into index.html.
 	
 	The cards in local storage have:
 	Key - "noteN_dataType"
-	Data - the data to be used by the card 
-		so for example a Date() object for an event card
+	Data - the text of the card
 
 	Input: note object
 	Output: html for embedding a card
 */
 function generateHTML(noteObj) {
-    var html = "";
-    var keyString = noteObj.noteName + "_" + noteObj.dataType;
-    var cardData, pathToCardHTMLstring;
+    // var html = "";
+    // var key = noteObj.noteName + "_" + noteObj.dataType;
+    var pathToCardHTMLstring;
 
     if (noteObj.dataType == "map") {
-
-    }
-    // else if (noteObj.dataType == "event") {
-    //     var dates = dateHandler
-
-    //     cardData = {
-    //         title: noteObj.text,
-    //         start: startDate,
-    //         end: endDate
-    //     };
-    //     localStorage.setItem(keyString, JSON.stringify(object));
-    //     pathToCardHTMLstring = "./ImageCard/ImageCard.html";
-    // } 
-    else if (noteObj.dataType == "image") {
-        cardData = noteObj.text;
-        localStorage.setItem(keyString, JSON.stringify(object));
+        pathToCardHTMLstring = "./MapCard/MapCard.html";
+    } else if (noteObj.dataType == "image") {
         pathToCardHTMLstring = "./ImageCard/ImageCard.html";
-    } else { //TODO make sure the text card has a script that parses into markdown
-        cardData = noteObj.text;
-        localStorage.setItem(keyString, JSON.stringify(object));
+    } else {
         pathToCardHTMLstring = "./TextCard/TextCard.html";
     }
 
+    //TODO make sure the text card has a script that parses into markdown
+    //no longer using local storage, straight up use the noteName as the key
+    //modify the html in the card's script not in here.
+    // localStorage.setItem(key, JSON.stringify(noteObj.text));
+    //TODO dynamically set the height and width of cards?
 
     html = '<object width="600" height="400">' +
-        '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + keystring + '\" width=\"600\" height=\"400\"> </embed>' +
+        '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + noteObj.noteName + '\" width=\"600\" height=\"400\"> </embed>' +
         '</object>';
 
     //concatenate delete and edit buttons onto the html
+    //TODO add a refresh card function to each card's js file. This is to allow editing
     html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
     return html;
 }
 
+//TODO double check this works
 function editNote(noteName) {
     var noteObj = JSON.parse(localStorage.getItem(noteName));
     valCheck = true;

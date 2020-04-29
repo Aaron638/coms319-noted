@@ -26,8 +26,6 @@ function sendEventData() {
 
     localStorage.setItem(noteName, JSON.stringify(newNote));
     console.log(newNote);
-
-    alert("Refresh your notes to see the event");
 }
 
 function getNumNotes() {
