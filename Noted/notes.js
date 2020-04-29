@@ -29,41 +29,44 @@ function deleteNote(num) {
     Pulls notes from the web storage and displays it on the page
 */
 function refreshNotes() {
-    var list = document.getElementById('noteList');
-    list.innerHTML = ""; //resets the list to empty
-    for (var i = parseInt(getNumNotes()); i > 0; i--) {
-
-        var noteObj = getNote(i);
-        if (!((noteObj == undefined) || (noteObj == null))) {
-            //var noteText = getNoteText(i);
-            var node = document.createElement("LI");
-
-            //The tagMap function needs to be in this refreshNotes function because it happens last
-            //While theres probably a better way, if we modify the HTML last second,
-            //theres little room for error
-            if (noteObj.isMap == true) {
-                var html = "<button type=\"button\" class=\"collapsible\">" + noteObj.text + "</button>" +
-                    "<div class=\"content\">" +
-                    "<div id=\"" + noteObj.text + "\" style=\"height: 480px;\"> </div> " +
-                    "</div>";
-                html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
-                node.innerHTML = html;
-                //Once the HTML is properly set, tagMap can work to override the div
-                tagMap(noteObj.text);
-            } else if (noteObj.isCard == true) { //TODO, use generate HTML for cards instead
-                var html =
-                    "<div class = \"content\">" +
-                    noteObj.text +
-                    "</div>";
-                node.innerHTML = html;
-            } else {
-                node.innerHTML = noteObj.html;
-            }
-
-            list.appendChild(node);
-        }
+    for (var i = 1; i <= getNumNotes(); i++) {
+        console.log(String(localStorage.getItem("note" + i)));
     }
-    collapseHandler();
+    // var list = document.getElementById('noteList');
+    // list.innerHTML = ""; //resets the list to empty
+    // for (var i = parseInt(getNumNotes()); i > 0; i--) {
+
+    //     var noteObj = getNote(i);
+    //     if (!((noteObj == undefined) || (noteObj == null))) {
+    //         //var noteText = getNoteText(i);
+    //         var node = document.createElement("LI");
+
+    //         //The tagMap function needs to be in this refreshNotes function because it happens last
+    //         //While theres probably a better way, if we modify the HTML last second,
+    //         //theres little room for error
+    //         if (noteObj.isMap == true) {
+    //             var html = "<button type=\"button\" class=\"collapsible\">" + noteObj.text + "</button>" +
+    //                 "<div class=\"content\">" +
+    //                 "<div id=\"" + noteObj.text + "\" style=\"height: 480px;\"> </div> " +
+    //                 "</div>";
+    //             html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
+    //             node.innerHTML = html;
+    //             //Once the HTML is properly set, tagMap can work to override the div
+    //             tagMap(noteObj.text);
+    //         } else if (noteObj.isCard == true) { //TODO, use generate HTML for cards instead
+    //             var html =
+    //                 "<div class = \"content\">" +
+    //                 noteObj.text +
+    //                 "</div>";
+    //             node.innerHTML = html;
+    //         } else {
+    //             node.innerHTML = noteObj.html;
+    //         }
+
+    //         list.appendChild(node);
+    //     }
+    // }
+    // collapseHandler();
 }
 
 /*

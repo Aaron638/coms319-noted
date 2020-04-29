@@ -34,7 +34,7 @@
         
         html {
             padding: 5px;
-            padding-bottom: 200px;
+            padding-bottom: 300px;
             /* border: 5.5px solid #7E2332; Border screws with formatting for some reason, sorry*/
             border-radius: 20px;
         }
@@ -171,12 +171,12 @@
         <form id="newNote">
             <textarea name="note" id="note" rows="26" cols="50"></textarea>
             <br><br>
-            <!--New Material Design Lite Checkboxes-->
             <!--Map Checkbox-->
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsMap">
 				<input type="checkbox" id="checkIsMap" class="mdl-checkbox__input">
 				<span class="mdl-checkbox__label">Add Map:</span>
 			</label>
+            <!--Add Note button-->
             <button class="button button1" onClick="addNote()">Save</button>
             <!--Event Collapsible-->
             <input id="collapsible" class="toggle" type="checkbox">
@@ -184,7 +184,7 @@
             <div class="collapsible-content">
                 <div class="content-inner">
                     <object>
-						<embed src="./datetimepicker/datetimepicker.html" width="300" height="600"> </embed>
+						<embed src="./datetimepicker/datetimepicker.html" width="300" height="500"> </embed>
 					</object>
                 </div>
             </div>

@@ -1,12 +1,11 @@
 /*
-    Similar to pushNote() in save-locally.js
-    But it uses the collapsible's HTML elements instead.
-    Anything from the collapsible needs to be forwarded properly. 
     This function uses the same principle as how we access cards.
-   
-    The date is sent to local storage
+    Instead it uses the collapsible's HTML elements.
+    Anything from the datetimpepicker.html needs to be forwarded to index.html. 
+    We get the date and text, and use a form to send it back to index.
+    https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_forms_through_JavaScript
 */
-function addCalendarEvent() {
+function sendEventData() {
     var date = $('#datepicker-inline').data('date');
     var text = document.getElementById("eventText").value;
 

@@ -48,7 +48,7 @@ input[type='checkbox'] {
 
 .collapsible-content {
     width: 350px;
-    height: 400px;
+    height: 465px;
     max-height: 0px;
     overflow: hidden;
     transition: max-height .25s ease-in-out;
