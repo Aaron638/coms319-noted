@@ -12,20 +12,13 @@ function addNote() {
     var noteObject;
 
     if (document.getElementById("checkIsMap").checked) {
-        pushNote(newNoteText, "map");
+        noteObject = pushNote(newNoteText, true);
     } else {
-        pushNote(newNoteText, "text");
+        noteObject = pushNote(newNoteText, false);
     }
 
     refreshNotes();
 
-}
-/*
-    Similar to addNote(), but opens a dialogue for picking a date and time
-    Then it directly forwards the date and time to the card.
-*/
-function addEvent(){
-    
 }
 
 function deleteNote(num) {
@@ -81,7 +74,7 @@ function collapseHandler() {
     var i;
 
     for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
+        coll[i].addEventListener("click", function() {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
             if (content.style.display === "block") {
