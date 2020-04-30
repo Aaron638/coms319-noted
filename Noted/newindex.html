@@ -51,8 +51,23 @@
     <br>
     <h1>Noted</h1>
     <br>
+
+    <!-- Edit overlay -->
+    <div id="editOverlay">
+        <div id="editNoteDiv">
+            <h2>Editing note</h2>
+            <form id="editNote">
+                <textarea name="editnote" id="editnote" rows="26" cols="50"></textarea>
+                <br><br>
+                <button class="button" id="editbutton" onClick="">Save</button>
+                <button class="button button2" onClick="exitOverlay()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Start of the Grid https://materializecss.com/grid.html-->
     <div class="row">
+        <!-- Left column for note Writing -->
         <div class="writeNote col s5">
             <h2>Write Note:</h2>
             <form id="newNote">
@@ -75,6 +90,7 @@
 
         </div>
 
+        <!-- Right column for Note viewing -->
         <div class="mergeNote col s7">
             <h2>Your notes:</h2>
             <ul class="note" id="noteList"></ul>
@@ -83,9 +99,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <!--For optimized loading JavaScript goes at the end unless needed in head-->
     <!--For Markdown Textarea with simplemde markdown editor-->

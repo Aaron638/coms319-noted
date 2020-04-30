@@ -48,6 +48,18 @@ function refreshNotes() {
 }
 
 /*
+    These functions are for the edit note overlay:
+*/
+function exitOverlay() {
+    document.getElementById("editOverlay").style.display = "none";
+}
+
+function enterEditOverlay(noteName) {
+    document.getElementById("editbutton").setAttribute("onClick", "editNote(\'" + noteName + "\');");
+    document.getElementById("editOverlay").style.display = "block";
+}
+
+/*
     This function is called by refreshNotes to handle the collapsing of the map iframes
     TODO Switch to CSS collapsing, more performant and cooler to look at, buttons are ugly
 */
