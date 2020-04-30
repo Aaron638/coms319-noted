@@ -45,21 +45,21 @@ h2:hover {
     background-color: #7E2332;
     color: #ede49d;
 }
+*/
 
 .button {
     background-color: #7E2332;
     border: 2px solid #7E2332;
     color: white;
-    padding: 5px 10px;
     text-align: center;
     font-family: helvetica;
     text-decoration: none;
     border-radius: 10px;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 18px;
     transition-duration: 0.4s;
     cursor: pointer;
+    height: 35px;
 }
 
 .button1 {
@@ -72,17 +72,6 @@ h2:hover {
     background-color: #7E2332;
     color: #f7f5ed;
 }
-
-.writeNote {
-    width: 50%;
-    float: left;
-}
-
-.mergeNote {
-    width: 40%;
-    float: left;
-}
-*/
 
 textarea#note {
     border: 3px solid #7E2332;
