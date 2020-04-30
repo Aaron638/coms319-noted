@@ -2,14 +2,20 @@ body {
     background-color: #ede49d;
 }
 
-html {
+
+/* html {
     padding: 5px;
     padding-bottom: 300px;
-    /* border: 5.5px solid #7E2332; Border screws with formatting for some reason, sorry*/
-    border-radius: 20px;
-}
+    border-radius: 20px; */
 
-h1 {
+
+/* border: 5.5px solid #7E2332; Border screws with formatting for some reason, sorry*/
+
+
+/* } */
+
+
+/* h1 {
     text-transform: uppercase;
     font-style: italic;
     font-family: Helvetica;
@@ -115,4 +121,4 @@ p#p {
 
 #editNoteDiv {
     text-align: center;
-}
+} */

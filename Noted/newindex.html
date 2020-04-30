@@ -3,6 +3,7 @@
 
 <head>
     <title>Noted</title>
+
     <!--For Maps Leaflet.js-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
@@ -30,15 +31,11 @@
 
     <!--We use CSS to handle the collapsibles-->
     <!-- <link rel="stylesheet" href="collapsible.css"> -->
-    <style>
-
-    </style>
-
 </head>
 
 <body onload="init_storage(); refreshNotes()">
 
-    <div id="editOverlay">
+    <!-- <div id="editOverlay">
         <div id="editNoteDiv">
             <h2>Editing note</h2>
             <form id="editNote">
@@ -47,9 +44,9 @@
                 <button class="button" id="editbutton" onClick="">Save</button>
                 <button class="button button2" onClick="exitOverlay()">Cancel</button>
             </form>
-
         </div>
-    </div>
+    </div> -->
+
     <h1>Noted</h1>
     <div class="writeNote">
         <h2>Write Note:</h2>
@@ -83,18 +80,9 @@
 
     <h1 id="errorMsg"></h1>
 
-
 </body>
 
 <script>
-    function exitOverlay() {
-        document.getElementById("editOverlay").style.display = "none";
-    }
-
-    function enterEditOverlay(noteName) {
-        document.getElementById("editbutton").setAttribute("onClick", "editNote(\'" + noteName + "\');");
-        document.getElementById("editOverlay").style.display = "block";
-    }
 </script>
 
 </html>
