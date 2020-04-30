@@ -34,7 +34,7 @@
     <!-- <link rel="stylesheet" href="collapsible.css"> -->
 </head>
 
-<body onload="init_storage(); refreshNotes()">
+<body>
 
     <!-- NavBar -->
     <nav>
@@ -55,18 +55,17 @@
     <div class="row">
         <div class="writeNote col s5">
             <h2>Write Note:</h2>
-            <p id="p">Click "save" to save your note to your browser.</p>
 
             <form id="newNote">
-                <textarea type="text" name="note" id="note" rows="26" cols="50" id="enterText"></textarea>
-                <br><br>
+                <textarea type="text" name="note" id="note" rows="20" cols="50"></textarea>
+                <br>
                 <!--Map Checkbox-->
                 <!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsMap">
 				<input type="checkbox" id="checkIsMap" class="mdl-checkbox__input">
 				<span class="mdl-checkbox__label">Add Map:</span>
 			</label> -->
-                <!--Add Note button-->
-                <!-- <button class="button button1" onClick="addNote()">Save</button> -->
+                <!--Save Note button-->
+                <button class="button button1" onClick="addNote()">Save Text</button>
                 <!--Event Collapsible-->
 
 
@@ -76,6 +75,11 @@
             <!-- <button class="button button1" onClick="reset_storage(); refreshNotes()">Reset Storage</button> -->
             <br><br>
 
+        </div>
+
+        <div class="mergeNote col s7">
+            <h2>Your notes:</h2>
+            <ul class="note" id="noteList"></ul>
         </div>
     </div>
 
@@ -89,15 +93,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!--Our Scripts-->
     <script src="./jsNoted/mapUtil.js"></script>
-    <script src="./jsNoted/mdParse.js"></script>
     <script src="./jsNoted/Note.js"></script>
     <script src="./jsNoted/notes.js"></script>
     <script src="./jsNoted/save-locally.js"></script>
-    <script>
-        //This is for stuff to do on page load
-        window.onload;
-        var simplemde = new SimpleMDE();
-    </script>
+    <script src="./jsNoted/onload.js"></script>
 </body>
 
 <script>

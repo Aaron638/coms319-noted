@@ -7,7 +7,8 @@
 */
 function addNote() {
     valCheck = true;
-    var newNoteText = document.forms["newNote"]["note"].value;
+    //Get the note text from the markdown editor
+    var newNoteText = simplemde.value();
 
     if (document.getElementById("checkIsMap").checked) {
         pushNote(newNoteText, true);

@@ -36,7 +36,7 @@ h2 {
     color: #7E2332;
     transition-duration: 0.4s;
     margin: 0;
-    padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 
@@ -100,8 +100,10 @@ textarea#note {
 p#p {
     font-family: Helvetica;
     color: #7E2332;
-    font-size: 20px;
+    font-size: 16px;
 }
+
+
 
 .note {
     font-family: Helvetica;

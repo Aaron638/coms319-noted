@@ -7,7 +7,7 @@ function init_storage() {
     if (typeof(Storage) == "undefined") {
         document.getElementById("result").innerHTML = "Your browser doesn't support Web Storage! Noted will not work.";
     } else {
-        if (localStorage.getItem("numNotes") === NaN) {
+        if (localStorage.getItem("numNotes") === NaN || localStorage.getItem("numNotes") === null) {
             console.log("numNotes is NULL, resetting local storage.")
             localStorage.clear();
             localStorage.setItem("numNotes", parseInt(0));
