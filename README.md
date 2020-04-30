@@ -25,3 +25,6 @@ The link to the html file has a query, which is a little bit of data we put in t
 
 The card's `.js` file will look at the query, and use it as a key to access local storage, which has the note object.
 The note object's `text` field is then used to populate the card.
+
+
+
