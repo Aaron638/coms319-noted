@@ -2,6 +2,10 @@ body {
     background-color: #ede49d;
 }
 
+nav {
+    background-color: #7E2332;
+}
+
 
 /* html {
     padding: 5px;
@@ -14,15 +18,14 @@ body {
 
 /* } */
 
-
-/* h1 {
+h1 {
     text-transform: uppercase;
-    font-style: italic;
     font-family: Helvetica;
     font-size: 40px;
     color: #7E2332;
     transition-duration: 0.4s;
     margin: 0;
+    padding-left: 10px;
 }
 
 h2 {
@@ -33,8 +36,11 @@ h2 {
     color: #7E2332;
     transition-duration: 0.4s;
     margin: 0;
+    padding-left: 10px;
 }
 
+
+/*
 h2:hover {
     background-color: #7E2332;
     color: #ede49d;
@@ -76,6 +82,7 @@ h2:hover {
     width: 40%;
     float: left;
 }
+*/
 
 textarea#note {
     border: 3px solid #7E2332;
@@ -85,8 +92,11 @@ textarea#note {
     font-family: Helvetica;
     letter-spacing: 1.5px;
     font-size: 16px;
+    height: 30%;
 }
 
+
+/*
 p#p {
     font-family: Helvetica;
     color: #7E2332;
