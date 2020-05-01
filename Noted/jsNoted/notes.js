@@ -46,7 +46,51 @@ function refreshNotes() {
             list.appendChild(node);
         }
     }
-    collapseHandler();
+    // collapseHandler();
+}
+
+function saveEvent() {
+    //Date from datepicker
+    var dpElem = document.getElementById("dp");
+    var instance = M.Datepicker.getInstance(dpElem);
+    var date = instance.toString();
+    console.log("date from dp:" + date);
+
+    //Time from timepicker
+    var tpElem = document.getElementById("tp");
+    var timeinstance = M.Timepicker.getInstance(tpElem);
+    console.log(timeinstance);
+    var min = timeinstance.minutes;
+    var hrs = timeinstance.hours;
+    var jsDate = new Date(date + " " + hrs + ":" + min);
+
+    //Title from text input
+    var title = document.getElementById("eventTitle").value;
+
+    var noteData = {
+        title: title,
+        date: jsDate
+    }
+
+    console.log("Date object is:" + noteData);
+
+    //Copy pushNote(), send a note
+    //Update numNotes, and make a new note
+    var numNotes = parseInt(getNumNotes());
+    numNotes += 1;
+    localStorage.setItem("numNotes", parseInt(numNotes));
+    var noteName = 'note' + numNotes;
+
+    //Make the note object, classified as event
+    var newNote = new Note(noteName, noteData, "event");
+    console.log("Setting note" + numNotes + " to: " + newNote.text + "as type: " + newNote.datatype);
+
+    //generate the html card for that note
+    newNote.html = generateHTML(newNote);
+
+    //store the note object and return
+    localStorage.setItem(noteName, JSON.stringify(newNote));
+    refreshNotes();
 }
 
 /*
@@ -59,25 +103,4 @@ function exitOverlay() {
 function enterEditOverlay(noteName) {
     document.getElementById("editbutton").setAttribute("onClick", "editNote(\'" + noteName + "\');");
     document.getElementById("editOverlay").style.display = "block";
-}
-
-/*
-    This function is called by refreshNotes to handle the collapsing of the map iframes
-    TODO Switch to CSS collapsing, more performant and cooler to look at, buttons are ugly
-*/
-function collapseHandler() {
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
 }

@@ -71,7 +71,7 @@ if (noteObject == null) {
     place = noteObject.text;
     mapnode.id = place;
 }
-//Add map to card
+//Add map to card, and edit styles
 document.getElementById(place).style.height = "80%";
 tagMap(place);
 

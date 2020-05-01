@@ -98,6 +98,8 @@ function generateHTML(noteObj) {
 
     if (noteObj.datatype == "map") {
         pathToCardHTMLstring = "/Noted/cards/MapCard/MapCard.html";
+    } else if (noteObj.datatype == "event") {
+        pathToCardHTMLstring = "/Noted/cards/EventCard/EventCard.html";
     } else if (noteObj.datatype == "image") {
         pathToCardHTMLstring = "/Noted/cards/ImageCard/ImageCard.html";
     } else {
@@ -117,8 +119,15 @@ function generateHTML(noteObj) {
         "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" height=\"325\"> </embed>" +
         "</div>";
 
-    //concatenate delete and edit buttons onto the html
-    html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit button button1 white\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
+    //concatenate delete and edit buttons onto the html, edit buttons only if they are a supported datatype
+    if (noteObj.datatype == "map" || noteObj.datatype == "image" || noteObj.datatype == "event") {
+        html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit button button1 white\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
+    } else {
+        html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
+    }
+
+
+
     return html;
 }
 

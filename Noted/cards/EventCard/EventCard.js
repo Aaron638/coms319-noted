@@ -10,16 +10,34 @@ function setTitle(title) {
     titleSpan.appendChild(document.createTextNode(title));
 }
 
-//Sets start and end date
-//fills the spans with the corresponding data
-//assume start and end date are already js Date() objects
-function defineDate(startDate, endDate) {
+//Set date and time
+function defineDate(date) {
     var dateSpan = document.getElementById("date");
     var timeSpan = document.getElementById("time");
 
-    dateSpan.appendChild(document.createTextNode(startDate.toDateString()));
-    var timeInterval = String(startDate.getHours()) + ":" + minuteMan(startDate) + "-" + String(endDate.getHours()) + ":" + minuteMan(endDate);
-    timeSpan.appendChild(document.createTextNode(timeInterval));
+    var dateString = date.toDateString();
+    var newDateStr = dateString.substring(0, dateString.lastIndexOf(" "));
+    console.log(newDateStr);
+    dateSpan.appendChild(document.createTextNode(newDateStr));
+
+    var datetext = date.toTimeString().split(' ')[0];
+    datetext = datetext.substring(0, datetext.lastIndexOf(":"));
+    var h = datetext.substring(0, datetext.indexOf(":"));
+    var dd = "AM"
+    if (h >= 12) {
+        h = h - 12;
+        dd = "PM";
+    }
+    if (h == 0) {
+        h = 12;
+    }
+    var m = datetext.substring(datetext.indexOf(":"), datetext.length);
+    m = m < 10 ? "0" + m : m;
+
+    var finalTimeString = "At " + String(h) + String(m) + dd;
+    console.log(finalTimeString);
+    timeSpan.appendChild(document.createTextNode(finalTimeString));
+
 }
 
 //Give a date
@@ -27,22 +45,23 @@ function defineDate(startDate, endDate) {
 //return minutes as a string
 function minuteMan(date) {
     var minutes = date.getMinutes();
-    if (Math.floor(minutes / 10) > 0) {//2 digits
+    if (Math.floor(minutes / 10) > 0) { //2 digits
         return String(date.getMinutes());
     } else {
-        return "0" + String(date.getMinutes());   //return 12:05, but just 05
+        return "0" + String(date.getMinutes()); //return 12:05, but just 05
     }
 }
 
 //im too lazy so i copy pasted code sorry
 function hourMan(date) {
     var hour = date.getHours();
-    if (Math.floor(hour / 10) > 0) {//2 digits
+    if (Math.floor(hour / 10) > 0) { //2 digits
         return String(date.getHours());
     } else {
-        return "0" + String(date.getHours());   //return 12:05, but just 05
+        return "0" + String(date.getHours()); //return 12:05, but just 05
     }
 }
+
 
 //Edit the Google calendar link
 //https://stackoverflow.com/a/21653600
@@ -50,13 +69,13 @@ function calendarLink(title, startDate, endDate) {
     //Constructing the date
     //Using https://stackoverflow.com/a/3067896
     //Add a function to Date()
-    Date.prototype.yyyymmdd = function () {
+    Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
         var dd = this.getDate();
 
         return [this.getFullYear(),
-        (mm > 9 ? '' : '0') + mm,
-        (dd > 9 ? '' : '0') + dd
+            (mm > 9 ? '' : '0') + mm,
+            (dd > 9 ? '' : '0') + dd
         ].join('');
     };
 
@@ -73,9 +92,9 @@ function calendarLink(title, startDate, endDate) {
     document.getElementById("calendarlink").href = urlStr;
 }
 
-
 //Run the code on windowload
 window.onload;
+
 //get from url parameter
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -84,7 +103,11 @@ console.log(key);
 //load the event object from storage
 var eventObject = JSON.parse(localStorage.getItem(key));
 console.log(eventObject);
-console.log(eventObject.start);
-setTitle(eventObject.title);
-defineDate(new Date(eventObject.start), new Date(eventObject.end));
-calendarLink(eventObject.title, new Date(eventObject.start), new Date(eventObject.end));
+console.log(eventObject.text);
+setTitle(eventObject.text.title);
+
+var dateobj = new Date(eventObject.text.date);
+defineDate(dateobj);
+var enddate = dateobj;
+enddate.setHours(enddate.getHours() + 2);
+calendarLink(eventObject.text.title, dateobj, enddate);

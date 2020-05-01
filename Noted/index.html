@@ -25,9 +25,6 @@
 
     <!--CSS-->
     <link rel="stylesheet" href="index.css">
-
-    <!--We use CSS to handle the collapsibles-->
-    <!-- <link rel="stylesheet" href="collapsible.css"> -->
 </head>
 
 <body>
@@ -71,17 +68,43 @@
                 <textarea type="text" name="note" id="note" rows="20" cols="50"></textarea>
             </form>
             <div class="row">
-                <!--Save Text button-->
-                <button class="button button1 col s3 offset-s1 white" onClick="addNote()">Save Text</button>
-                <!--Add Event button-->
-                <button class="button button1 col s3 offset-s1 white">Save Event</button>
+
                 <!--Map Checkbox-->
-                <p class="col s3 offset-s1">
+                <p class="col s3">
                     <label>
                     <input type="checkbox" id="checkIsMap"/>
                     <span>Add Map</span>
                 </label>
                 </p>
+                <!--Save Text button-->
+                <button class="button button1 col s3 white" onClick="addNote()">Save Text</button>
+
+                <!--Add Event Collapisble and button-->
+                <div class="row col s5 offset-s1">
+                    <button class="button button1 col s10 offset-s1 white" onClick="saveEvent()">Save Event</button>
+                    <br>
+                    <ul class="collapsible  white">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">event</i>Date</div>
+                            <div class="collapsible-body">
+                                <input id="dp" type="text" class="datepicker" placeholder="Event Date">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">query_builder</i>Time</div>
+                            <div class="collapsible-body">
+                                <input id="tp" type="text" class="timepicker" placeholder="Event Time">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">create</i>Title</div>
+                            <div class="collapsible-body">
+                                <input id="eventTitle" type="text" placeholder="Title">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
             <br><br>
 
