@@ -116,12 +116,14 @@ function generateHTML(noteObj) {
     //     '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + noteObj.noteName + '\" width=\"600\" height=\"400\"> </embed>' +
     //     '</object>';
     html = "<div class=\"row\" style=\"padding-bottom: 0;\">" +
-        "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" height=\"325\"> </embed>" +
+        "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:100%;height:50vh;\"> </embed>" +
         "</div>";
 
     //concatenate delete and edit buttons onto the html, edit buttons only if they are a supported datatype
-    if (noteObj.datatype == "map" || noteObj.datatype == "image" || noteObj.datatype == "text") {
+    if (noteObj.datatype == "map" || noteObj.datatype == "image") {
         html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit button button1 white\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
+    } else if (noteObj.datatype == "text") {
+        html += "<button type=\"button\" class=\"edit button button1 white\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
     } else {
         html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
     }

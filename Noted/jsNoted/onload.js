@@ -4,6 +4,9 @@
 
 window.onload;
 
+//When the browser storage changes, we refreshNotes()
+window.addEventListener("storage", refreshNotes);
+
 var finishedEditing = true;
 
 init_storage();

@@ -1,7 +1,9 @@
+function deleteThisCard() {
+    popNote(noteObject.noteName);
+}
+
 //Run the code on windowload
 window.onload;
-
-
 
 //get from url parameter
 const queryString = window.location.search;

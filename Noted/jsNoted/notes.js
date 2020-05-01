@@ -42,6 +42,7 @@ function refreshNotes() {
         if (!((noteObj == undefined) || (noteObj == null))) {
             //Append a list element with the note's designated HTML.
             var node = document.createElement("LI");
+            //node.style = "display: flex;"
             node.innerHTML = noteObj.html;
             list.appendChild(node);
         }
