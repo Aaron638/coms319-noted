@@ -115,8 +115,8 @@ function generateHTML(noteObj) {
     // html = '<object width="600" height="400">' +
     //     '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + noteObj.noteName + '\" width=\"600\" height=\"400\"> </embed>' +
     //     '</object>';
-    html = "<div class=\"row\" style=\"padding-bottom: 0;\">" +
-        "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:100%;height:50vh;\"> </embed>" +
+    html = "<div class=\"row\" style=\"padding-bottom: 0;;margin-bottom: 0px;\">" +
+        "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:10.5vw;\"> </embed>" +
         "</div>";
 
     //concatenate delete and edit buttons onto the html, edit buttons only if they are a supported datatype
