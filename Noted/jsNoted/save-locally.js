@@ -97,13 +97,13 @@ function generateHTML(noteObj) {
     var pathToCardHTMLstring;
 
     if (noteObj.datatype == "map") {
-        pathToCardHTMLstring = "../cards/MapCard/MapCard.html";
+        pathToCardHTMLstring = "../../Noted/cards/MapCard/MapCard.html";
     } else if (noteObj.datatype == "event") {
-        pathToCardHTMLstring = "../cards/EventCard/EventCard.html";
+        pathToCardHTMLstring = "../../Noted/cards/EventCard/EventCard.html";
     } else if (noteObj.datatype == "image") {
-        pathToCardHTMLstring = "../cards/ImageCard/ImageCard.html";
+        pathToCardHTMLstring = "../../Noted/cards/ImageCard/ImageCard.html";
     } else {
-        pathToCardHTMLstring = "../cards/TextCard/TextCard.html";
+        pathToCardHTMLstring = "../../Noted/cards/TextCard/TextCard.html";
     }
 
     //TODO make sure the text card has a script that parses into markdown
