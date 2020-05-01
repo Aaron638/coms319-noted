@@ -81,3 +81,39 @@ textarea#note {
 #editNoteDiv {
     text-align: center;
 }
+
+.datepicker-date-display {
+    background-color: #7E2332;
+}
+
+.datepicker-cancel {
+    color: #7E2332;
+}
+
+.datepicker-done {
+    color: #7E2332;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #7E2332;
+}
+
+.timepicker-digital-display {
+    background-color: #7E2332;
+}
+
+.timepicker-canvas line {
+    stroke: rgb(129, 42, 57) !important;
+}
+
+.timepicker-canvas-bearing {
+    fill: rgb(129, 42, 57) !important;
+}
+
+.timepicker-canvas-bg {
+    fill: rgb(129, 42, 57)!important;
+}
+
+.datepicker-table td.is-today {
+    color: #7E2332;
+}
