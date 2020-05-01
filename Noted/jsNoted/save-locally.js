@@ -74,7 +74,7 @@ function pushNote(data, isMap) {
 function classifiyNote(inputText, isMap) {
     if (isMap == true) {
         return "map";
-    } else if (inputText.search(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gm) > 0) {
+    } else if (inputText.match(/\.(jpeg|jpg|gif|png)$/) != null) {
         return "image";
     } else {
         return "text";
