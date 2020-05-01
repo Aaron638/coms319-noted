@@ -98,26 +98,29 @@ function generateHTML(noteObj) {
 
     if (noteObj.datatype == "map") {
         pathToCardHTMLstring = "../../Noted/cards/MapCard/MapCard.html";
+        html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
+            "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:17vw;\"> </embed>" +
+            "</div>";
     } else if (noteObj.datatype == "event") {
         pathToCardHTMLstring = "../../Noted/cards/EventCard/EventCard.html";
+        html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
+            "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:13.5vw;\"> </embed>" +
+            "</div>";
     } else if (noteObj.datatype == "image") {
         pathToCardHTMLstring = "../../Noted/cards/ImageCard/ImageCard.html";
+        html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
+            "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"max-width:100%;height:26.5vw;max-height:100%;overflow:hidden;\"> </embed>" +
+            "</div>";
     } else {
         pathToCardHTMLstring = "../../Noted/cards/TextCard/TextCard.html";
+        html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
+            "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:10.5vw;\"> </embed>" +
+            "</div>";
     }
 
-    //TODO make sure the text card has a script that parses into markdown
-    //no longer using local storage, straight up use the noteName as the key
-    //modify the html in the card's script not in here.
+    //use the noteName as the key
     // localStorage.setItem(key, JSON.stringify(noteObj.text));
     //https://stackoverflow.com/a/16108864 
-
-    // html = '<object width="600" height="400">' +
-    //     '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + noteObj.noteName + '\" width=\"600\" height=\"400\"> </embed>' +
-    //     '</object>';
-    html = "<div class=\"row\" style=\"padding-bottom: 0;;margin-bottom: 0px;\">" +
-        "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:10.5vw;\"> </embed>" +
-        "</div>";
 
     //concatenate delete and edit buttons onto the html, edit buttons only if they are a supported datatype
     if (noteObj.datatype == "map" || noteObj.datatype == "image") {
