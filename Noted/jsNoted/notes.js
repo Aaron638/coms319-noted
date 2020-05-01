@@ -9,8 +9,10 @@ function addNote() {
     valCheck = true;
     //Get the note text from the markdown editor
     var newNoteText = simplemde.value();
+    console.log(simplemde.value());
 
     if (document.getElementById("checkIsMap").checked) {
+        console.log("the note is a map")
         pushNote(newNoteText, true);
     } else {
         pushNote(newNoteText, false);

@@ -93,42 +93,47 @@ function classifiyNote(inputText, isMap) {
 	Output: html for embedding a card
 */
 function generateHTML(noteObj) {
+    console.log(noteObj);
     var pathToCardHTMLstring;
 
-    if (noteObj.dataType == "map") {
-        pathToCardHTMLstring = "./MapCard/MapCard.html";
-    } else if (noteObj.dataType == "image") {
-        pathToCardHTMLstring = "./ImageCard/ImageCard.html";
+    if (noteObj.datatype == "map") {
+        pathToCardHTMLstring = "/Noted/cards/MapCard/MapCard.html";
+    } else if (noteObj.datatype == "image") {
+        pathToCardHTMLstring = "/Noted/cards/ImageCard/ImageCard.html";
     } else {
-        pathToCardHTMLstring = "./TextCard/TextCard.html";
+        pathToCardHTMLstring = "/Noted/cards/TextCard/TextCard.html";
     }
 
     //TODO make sure the text card has a script that parses into markdown
     //no longer using local storage, straight up use the noteName as the key
     //modify the html in the card's script not in here.
     // localStorage.setItem(key, JSON.stringify(noteObj.text));
-    //TODO dynamically set the height and width of cards?
+    //https://stackoverflow.com/a/16108864 
 
-    html = '<object width="600" height="400">' +
-        '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + noteObj.noteName + '\" width=\"600\" height=\"400\"> </embed>' +
-        '</object>';
+    // html = '<object width="600" height="400">' +
+    //     '    <embed src=\"' + pathToCardHTMLstring + '?cardkey=' + noteObj.noteName + '\" width=\"600\" height=\"400\"> </embed>' +
+    //     '</object>';
+    html = "<div class=\"row\" style=\"padding-bottom: 0;\">" +
+        "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" height=\"325\"> </embed>" +
+        "</div>";
 
     //concatenate delete and edit buttons onto the html
-    html += "<br><button type=\"button\" class=\"del\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
+    html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit button button1 white\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
     return html;
 }
 
-//TODO Note: This may be broken now
-//The content may need to be re-sent to the card
-//Maybe switch to adding a note, then deleting it
 function editNote(noteName) {
     var noteObj = JSON.parse(localStorage.getItem(noteName));
     valCheck = true;
 
-    var newNoteText = document.forms["editNote"]["editnote"].value;
-
+    var newNoteText = editMDE.value();
     noteObj.text = newNoteText;
-    generateHTML(noteObj);
+    var isMap = false;
+    if (noteObj.datatype == "map") {
+        isMap = true;
+    }
+    noteObj.datatype = classifiyNote(noteObj, isMap);
+    noteObj.html = generateHTML(noteObj);
 
     localStorage.setItem(noteName, JSON.stringify(noteObj));
 
