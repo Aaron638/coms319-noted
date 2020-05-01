@@ -2,218 +2,117 @@
 <html>
 
 <head>
-	<title>Noted</title>
-	<!--For Maps-->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-		crossorigin="" />
-	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-		crossorigin=""></script>
+    <title>Noted</title>
 
-	<!--For Cards-->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-amber.min.css" />
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="description" content="A webapp for storing notes with your browser.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="assets/favicon-16x16.png">
 
-	<script src="mapUtil.js"></script>
-	<script src="Note.js"></script>
-	<script src="save-locally.js"></script>
-	<script src="notes.js"></script>
-	<script src="mdParse.js"></script>
-	<script src="cardHandler.js"></script>
+    <!--For Markdown Textarea with simplemde markdown editor-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 
-	<style>
-		body {
-			background-color: #ede49d;
-		}
+    <!--MaterialDesignLite-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-amber.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
-		html {
-			padding: 5px;
-			border: 5.5px solid #7E2332;
-			border-radius: 20px;
-		}
+    <!--Materialize-->
+    <!--For Date and Time pickers and CSS animations-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		h2 {
-			text-transform: uppercase;
-			font-style: italic;
-			font-family: Helvetica;
-			font-size: 20px;
-			color: #7E2332;
-			transition-duration: 0.4s;
-		}
+    <!--CSS-->
+    <link rel="stylesheet" href="index.css">
 
-		h2:hover {
-			background-color: #7E2332;
-			color: #ede49d;
-		}
-
-		.button {
-			background-color: #7E2332;
-			border: 2px solid #7E2332;
-			color: white;
-			padding: 5px 10px;
-			text-align: center;
-			font-family: helvetica;
-			text-decoration: none;
-			border-radius: 10px;
-			display: inline-block;
-			font-size: 16px;
-			margin: 4px 2px;
-			transition-duration: 0.4s;
-			cursor: pointer;
-		}
-
-		.button1 {
-			background-color: white;
-			color: #7E2332;
-		}
-
-		.button1:hover {
-			background-color: #7E2332;
-			color: #f7f5ed;
-		}
-
-		.writeNote {
-			width: 50%;
-			float: left;
-		}
-
-		.mergeNote {
-			width: 40%;
-			float: left;
-		}
-
-		textarea#note {
-			border: 3px solid #7E2332;
-			border-radius: 8px;
-			padding: 8px;
-			background-color: #f7f5ed;
-			font-family: Helvetica;
-			letter-spacing: 1.5px;
-			font-size: 16px;
-		}
-
-		p#p {
-			font-family: Helvetica;
-			color: #7E2332;
-			font-size: 20px;
-		}
-
-		.note {
-			font-family: Helvetica;
-			letter-spacing: 1px;
-			color: #7E2332;
-			transition-duration: 0.4s;
-		}
-
-		.note:hover {
-			background-color: #7E2332;
-			color: #f7f5ed;
-		}
-
-		#editOverlay {
-			position: fixed;
-			display: none;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background-color: rgba(0, 0, 0, 0.5);
-			z-index: 2;
-			cursor: pointer;
-		}
-
-		#editNoteDiv {
-			text-align: center;
-		}
-	</style>
-
+    <!--We use CSS to handle the collapsibles-->
+    <!-- <link rel="stylesheet" href="collapsible.css"> -->
 </head>
 
-<body onload="init_storage(); refreshNotes()">
+<body>
 
-	<div id="editOverlay">
-		<div id="editNoteDiv">
-			<h2>Editing note</h2>
-			<form id="editNote">
-				<textarea name="editnote" id="editnote" rows="26" cols="50"></textarea>
-				<br><br>
-				<button class="button" id="editbutton" onClick="">Save</button>
-				<button class="button button2" onClick="exitOverlay()">Cancel</button>
-			</form>
+    <!-- NavBar -->
+    <nav>
+        <div class="nav-wrapper">
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <br>
+    <h1>Noted</h1>
+    <br>
 
-		</div>
-	</div>
+    <!-- Edit overlay -->
+    <div id="editOverlay">
+        <div id="editNoteDiv">
+            <h2>Editing note</h2>
+            <form id="editNote">
+                <textarea name="editnote" id="editnote" rows="26" cols="50"></textarea>
+                <br><br>
+                <button class="button" id="editbutton" onClick="">Save</button>
+                <button class="button button2" onClick="exitOverlay()">Cancel</button>
+            </form>
+        </div>
+    </div>
 
-	<div class="writeNote">
-		<h2>Locally save note</h2>
-		<p id="p">Click "save" to save your note via the Web Storage API.</p>
-		<form id="newNote">
-			<textarea name="note" id="note" rows="26" cols="50"></textarea>
-			<br><br>
-			<!--New Material Design Lite Checkboxes-->
-			<!--Map Checkbox-->
-			<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsMap">
-				<input type="checkbox" id="checkIsMap" class="mdl-checkbox__input">
-				<span class="mdl-checkbox__label">Add Map:</span>
-			</label>
-			<!--Card Checkbox-->
-			<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsCard">
-				<input type="checkbox" id="checkIsCard" class="mdl-checkbox__input">
-				<span class="mdl-checkbox__label">Add Card:</span>
-			</label>
-			<!--Calendar Event Checkbox-->
-			<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIsEvent">
-				<input type="checkbox" id="checkIsEvent" class="mdl-checkbox__input">
-				<span class="mdl-checkbox__label">Add Event:</span>
-			</label>
-			<br><br>
-			<button class="button button1" onClick="addNote()">Save</button>
-		</form>
+    <!-- Start of the Grid https://materializecss.com/grid.html-->
+    <div class="row">
 
-		<br>
-		<button class="button button1" onClick="reset_storage(); refreshNotes()">Reset Storage</button>
-		<br><br>
+        <!-- Left column for Note Writing -->
+        <div class="writeNote col s5">
+            <h2>Write Note:</h2>
+            <form id="newNote">
+                <textarea type="text" name="note" id="note" rows="20" cols="50"></textarea>
+            </form>
+            <div class="row">
+                <!--Save Text button-->
+                <button class="button button1 col s3 offset-s1 white" onClick="addNote()">Save Text</button>
+                <!--Add Event button-->
+                <button class="button button1 col s3 offset-s1 white">Save Event</button>
+                <!--Map Checkbox-->
+                <p class="col s3 offset-s1">
+                    <label>
+                    <input type="checkbox" id="checkIsMap"/>
+                    <span>Add Map</span>
+                </label>
+                </p>
+            </div>
+            <br><br>
 
-	</div>
-	
-	<div class="mergeNote">
-		<h2>Your notes:</h2>
-		<ul class="note" id="noteList"></ul>
-	</div>
+        </div>
 
-	<h1 id="errorMsg"></h1>
+        <!-- Right column for Note viewing -->
+        <div class="mergeNote col s7">
+            <h2>Your notes:</h2>
+            <ul class="note" id="noteList"></ul>
+            <div class="row">
+                <!-- <div class="row">
+                    <embed class="col s6" height="300" src="./cards/TextCard/TextCard.html"></embed>
+                </div> -->
+                <button class="button button1 col s3 offset-s3 white" onClick="reset_storage(); refreshNotes()">Reset Storage</button>
+            </div>
+        </div>
+    </div>
 
-
+    <!--For optimized loading JavaScript goes at the end unless needed in head-->
+    <!--For Markdown Textarea with simplemde markdown editor-->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!--Materialize for DateTimePicker and other features-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Our Scripts-->
+    <script src="./jsNoted/Note.js"></script>
+    <script src="./jsNoted/notes.js"></script>
+    <script src="./jsNoted/save-locally.js"></script>
+    <script src="./jsNoted/onload.js"></script>
 </body>
 
 <script>
-	var coll = document.getElementsByClassName("collapsible");
-	var i;
-
-	for (i = 0; i < coll.length; i++) {
-		coll[i].addEventListener("click", function () {
-			this.classList.toggle("active");
-			var content = this.nextElementSibling;
-			if (content.style.display === "block") {
-				content.style.display = "none";
-			} else {
-				content.style.display = "block";
-			}
-		});
-	}
-
-	function exitOverlay() {
-		document.getElementById("editOverlay").style.display = "none";
-	}
-
-	function enterEditOverlay(noteName) {
-		document.getElementById("editbutton").setAttribute("onClick", "editNote(\'" + noteName + "\');");
-		document.getElementById("editOverlay").style.display = "block";
-	}
 </script>
 
 </html>

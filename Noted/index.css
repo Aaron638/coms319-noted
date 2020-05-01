@@ -1,0 +1,83 @@
+body {
+    background-color: #ede49d;
+}
+
+nav {
+    background-color: #7E2332;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-family: Helvetica;
+    font-size: 40px;
+    color: #7E2332;
+    transition-duration: 0.4s;
+    margin: 0;
+    padding-left: 10px;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-style: italic;
+    font-family: Helvetica;
+    font-size: 20px;
+    color: #7E2332;
+    transition-duration: 0.4s;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.button {
+    background-color: #7E2332;
+    border: 2px solid #7E2332;
+    color: white;
+    text-align: center;
+    font-family: helvetica;
+    text-decoration: none;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 18px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 35px;
+}
+
+.button1 {
+    background-color: white;
+    color: #7E2332;
+    margin: 0;
+}
+
+.button1:hover {
+    background-color: #7E2332;
+    color: #f7f5ed;
+}
+
+textarea#note {
+    border: 3px solid #7E2332;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #f7f5ed;
+    font-family: Helvetica;
+    letter-spacing: 1.5px;
+    font-size: 16px;
+    height: 30%;
+}
+
+#editOverlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 2;
+    cursor: pointer;
+}
+
+#editNoteDiv {
+    text-align: center;
+}

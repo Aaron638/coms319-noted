@@ -1,1 +1,38 @@
-<!--TODO make a map card-->
+<html>
+
+<head>
+    <!--For Maps Leaflet.js-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="MapCard.css">
+</head>
+
+<body>
+    <div class="card small">
+        <div id="mapHolder" class="card-image waves-effect waves-block waves-light">
+            <!-- Map goes in this div -->
+        </div>
+        <div class="card-content">
+            <span id="titleSpan" class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+            <p><a id="googleMapLink" href="#" target="_blank">googleMapLink</a></p>
+        </div>
+        <div class="card-reveal">
+            <span id="titleSpan2" class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+            <p id="wikipediaDesc">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </p>
+        </div>
+    </div>
+    <!--Load JS at the end-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="mapUtil.js"></script>
+    <script src="MapCard.js"></script>
+
+</body>
+
+</html>

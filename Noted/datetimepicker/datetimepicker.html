@@ -1,0 +1,76 @@
+<html lang="">
+
+<head>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <!-- Propeller typography -->
+    <link href="http://propeller.in/components/typography/css/typography.css" type="text/css" rel="stylesheet" />
+    <!-- Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="http://propeller.in/components/icon/css/google-icons.css" type="text/css" rel="stylesheet" />
+    <!-- Propeller bootstrap datetimepicker -->
+    <link href="css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+    <!-- ProDatatable -->
+    <link href="css/pmd-datetimepicker.css" type="text/css" rel="stylesheet" />
+
+    <!--Our Scripts-->
+    <script src="sendEvent.js" type="text/javascript" language="javascript"></script>
+    <script src="../Note.js" type="text/javascript" language="javascript"></script>
+    <style>
+        button {
+            width: 300px;
+            margin: 0;
+        }
+        
+        input {
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Inline Datepicker -->
+    <section class="row component-section">
+        <div class="col-md-9">
+            <div class="component-box">
+                <input id="eventText" type="text" placeholder="Event Title"></input>
+                <div class="pmd-card pmd-z-depth pmd-card-custom-view">
+                    <div class="pmd-card-body">
+                        <div id="datepicker-inline"></div>
+                    </div>
+                </div>
+                <button onclick="sendEventData()">Submit</button>
+            </div>
+        </div>
+    </section>
+    <!-- Inline Datepicker end -->
+
+    <!-- jquery JS -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Bootstrap js -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Propeller Global js -->
+    <script src="http://propeller.in/components/global/js/global.js"></script>
+
+    <!-- Textfield js -->
+    <script type="text/javascript" src="http://propeller.in/components/textfield/js/textfield.js"></script>
+
+    <!-- Datepicker moment with locales -->
+    <script type="text/javascript" language="javascript" src="js/moment-with-locales.js"></script>
+
+    <!-- Propeller Bootstrap datetimepicker -->
+    <script type="text/javascript" language="javascript" src="js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            // Inline datepicker
+            $('#datepicker-inline').datetimepicker({
+                inline: true
+            });
+        });
+    </script>
+
+</body>
+
+</html>
