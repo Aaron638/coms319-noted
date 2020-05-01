@@ -4,6 +4,8 @@
 
 window.onload;
 
+var finishedEditing = true;
+
 init_storage();
 refreshNotes();
 

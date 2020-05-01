@@ -120,7 +120,7 @@ function generateHTML(noteObj) {
         "</div>";
 
     //concatenate delete and edit buttons onto the html, edit buttons only if they are a supported datatype
-    if (noteObj.datatype == "map" || noteObj.datatype == "image" || noteObj.datatype == "event") {
+    if (noteObj.datatype == "map" || noteObj.datatype == "image" || noteObj.datatype == "text") {
         html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button><button type=\"button\" class=\"edit button button1 white\" onClick=\"enterEditOverlay(\'" + noteObj.noteName + "\');\">Edit</button>";
     } else {
         html += "<button type=\"button\" class=\"del button button1 white\" onClick=\"deleteNote(\'" + noteObj.noteName + "\'); refreshNotes()\">Delete</button>";
@@ -135,18 +135,35 @@ function editNote(noteName) {
     var noteObj = JSON.parse(localStorage.getItem(noteName));
     valCheck = true;
 
+    finishedEditing = false;
+    //Now we have to wait till the user is done editing
+    waitForEdit();
+
     var newNoteText = editMDE.value();
+    console.log(newNoteText);
+
     noteObj.text = newNoteText;
     var isMap = false;
     if (noteObj.datatype == "map") {
         isMap = true;
     }
-    noteObj.datatype = classifiyNote(noteObj, isMap);
+    noteObj.datatype = classifiyNote(newNoteText, isMap);
     noteObj.html = generateHTML(noteObj);
 
     localStorage.setItem(noteName, JSON.stringify(noteObj));
 
     refreshNotes();
+}
+
+function saveEdit() {
+    finishedEditing = true;
+}
+
+//Waits for finishedEditing to be true, otherwise waits 1 second.
+function waitForEdit() {
+    if (finishedEditing == false) {
+        setTimeout(waitForEdit, 1000);
+    }
 }
 
 /*
