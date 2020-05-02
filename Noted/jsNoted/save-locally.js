@@ -97,22 +97,22 @@ function generateHTML(noteObj) {
     var pathToCardHTMLstring;
 
     if (noteObj.datatype == "map") {
-        pathToCardHTMLstring = "../../Noted/cards/MapCard/MapCard.html";
+        pathToCardHTMLstring = "../cards/MapCard/MapCard.html";
         html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
             "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:17vw;\"> </embed>" +
             "</div>";
     } else if (noteObj.datatype == "event") {
-        pathToCardHTMLstring = "../../Noted/cards/EventCard/EventCard.html";
+        pathToCardHTMLstring = "../cards/EventCard/EventCard.html";
         html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
             "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:13.5vw;\"> </embed>" +
             "</div>";
     } else if (noteObj.datatype == "image") {
-        pathToCardHTMLstring = "../../Noted/cards/ImageCard/ImageCard.html";
+        pathToCardHTMLstring = "../cards/ImageCard/ImageCard.html";
         html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
             "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"max-width:100%;height:26.5vw;max-height:100%;overflow:hidden;\"> </embed>" +
             "</div>";
     } else {
-        pathToCardHTMLstring = "../../Noted/cards/TextCard/TextCard.html";
+        pathToCardHTMLstring = "../cards/TextCard/TextCard.html";
         html = "<div class=\"row\" style=\"padding-bottom: 0;margin-bottom: 0px;\">" +
             "<embed src=\"" + pathToCardHTMLstring + "?cardkey=" + noteObj.noteName + "\" class=\"col s6\" style=\"width:30vw;height:10.5vw;\"> </embed>" +
             "</div>";
